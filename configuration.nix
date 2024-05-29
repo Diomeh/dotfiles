@@ -125,6 +125,7 @@
     google-chrome
     gitkraken
     wineWowPackages.stable
+    winetricks
     lutris
     pciutils
     neofetch
