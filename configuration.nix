@@ -148,6 +148,7 @@
     beekeeper-studio
     libsForQt5.filelight
     vlc
+    tree
     # davinci-resolve
     # (import ./fdm.nix)
   ];
