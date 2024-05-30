@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     ./modules/nixos/nvidia.nix
     ./modules/nixos/libvirt.nix
+    ./modules/nixos/samba.nix
   ];
 
   nix.extraOptions = "experimental-features = nix-command flakes";
