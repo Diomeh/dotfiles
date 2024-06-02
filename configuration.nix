@@ -108,6 +108,10 @@
     ];
   };
 
+  # Generate fontconfig file
+  fonts.fontconfig.enable = true;
+  fonts.fontDir.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
