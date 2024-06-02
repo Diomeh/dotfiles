@@ -151,6 +151,8 @@
     libsForQt5.filelight
     vlc
     tree
+    steam-run
+    # devenv
     # davinci-resolve
     # (import ./fdm.nix)
   ];
