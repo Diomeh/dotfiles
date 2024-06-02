@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, options, ... }:
 
 {
   imports = [
@@ -158,10 +158,10 @@
   # Enable nix-ld for jetbrains IDE's
   programs.nix-ld = {
     enable = true;
-    libraries = with pkgs; [
+    libraries = options.programs.nix-ld.libraries.default ++ (with pkgs; [ 
       # Add missing dynamic libraries for unpackaged
       # programs here, NOT in environment.systemPackages
-    ];
+     ]);
   };
 
   # Install firefox.
