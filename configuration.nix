@@ -158,7 +158,7 @@
     vlc
     tree
     steam-run
-    # devenv
+    devenv
     # davinci-resolve
     # (import ./fdm.nix)
   ];
