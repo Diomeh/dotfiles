@@ -11,6 +11,7 @@
     ./modules/nixos/nvidia.nix
     ./modules/nixos/libvirt.nix
     ./modules/nixos/samba.nix
+    ./modules/nixos/hyprland.nix
   ];
 
   nix.extraOptions = "experimental-features = nix-command flakes";
