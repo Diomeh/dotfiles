@@ -161,7 +161,6 @@
     lshw
     lsof
     bruno
-    xclip
     beekeeper-studio
     libsForQt5.filelight
     vlc

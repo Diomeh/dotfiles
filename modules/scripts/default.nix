@@ -6,6 +6,14 @@ pkgs.stdenv.mkDerivation {
   src = ./src;
   dontBuild = true;
 
+  # Binaries required by the scripts
+  buildInputs = with pkgs; [
+    xclip # copy, paste
+    p7zip # xtract
+    unzip # xtract
+    unrar # xtract
+  ];
+
   installPhase = ''
     mkdir -p $out/bin
     install --mode +x -t $out/bin ./*

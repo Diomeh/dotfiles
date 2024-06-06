@@ -13,78 +13,103 @@ Options:
   -l, --list          List the contents of the file.
   -h, --help          Show this help message and exit.
 
-If the output directory is not specified, the file is extracted to the current directory.
+If the output directory is not specified, the file is extracted to the current directory or to a directory named after the compressed file if contents are not immediately inside a folder.
 
 Example:
-  $0 file.tar.gz
-  $0 file.tar.gz ~/Documents
+  $(basename "$0") file.tar.gz
+  $(basename "$0") file.tar.gz ~/Documents
 
 Supported file types:
   .7z, .zip, .rar, .gz, .bz2, .xz, .tar, .tgz, .tar.gz, .tar.bz2, .tar.xz, .tar.7z
 EOF
 }
 
-check_dependencies() {
-    local file_extension="$1"
-    local dependency
+# file_types associative array
+# This associative array maps file extensions to the commands and flags needed
+# for listing and extracting the contents of the compressed files.
+#
+# Key: File extension (without leading dot)
+# Value: A string containing four space-separated components:
+#   1. Dependency command: The command required to handle the file type.
+#   2. List flag: The flag used with the dependency command to list contents.
+#   3. Extract flag: The flag used with the dependency command to extract contents.
+#   4. Output flag (optional): The flag used to specify the output directory for extraction.
+declare -A file_types=(
+    ["7z"]="7z l x -o"
+    ["zip"]="unzip -l -d -d"
+    ["rar"]="unrar l x"
+    ["gz"]="tar -tzf -xzf -C"
+    ["tgz"]="tar -tzf -xzf -C"
+    ["tar.gz"]="tar -tzf -xzf -C"
+    ["bz2"]="tar -tjf -xjf -C"
+    ["tar.bz2"]="tar -tjf -xjf -C"
+    ["xz"]="tar -tJf -xJf -C"
+    ["tar.xz"]="tar -tJf -xJf -C"
+    ["tar"]="tar -tf -xf -C"
+    ["tar.7z"]="7z l x -o"
+)
 
-    case "$file_extension" in
-        *.7z) dependency="7z" ;;
-        *.zip) dependency="unzip" ;;
-        *.rar) dependency="unrar" ;;
-        *.gz|*.tgz|*.tar.gz) dependency="tar" ;;
-        *.bz2|*.tar.bz2) dependency="tar" ;;
-        *.xz|*.tar.xz) dependency="tar" ;;
-        *.tar) dependency="tar" ;;
-        *.tar.7z) dependency="7z" ;;
-    esac
+process_file() {
+    local action="$1"
+    local file="$2"
+    local output="$3"
+    local file_extension="${file##*.}"
+    local list_flag extract_flag output_flag
 
-    if ! command -v "$dependency" &> /dev/null; then
-        echo "Error: $dependency is not installed." >&2
+    if [[ -z "${file_types[${file##*.}]:-}" ]]; then
+        echo "Error: Unsupported file type" >&2
         exit 1
     fi
-}
 
-list_contents() {
-    case "$file" in
-        *.7z) 7z l "$file" ;;
-        *.zip) unzip -l "$file" ;;
-        *.rar) unrar l "$file" ;;
-        *.gz) tar -tzf "$file" ;;
-        *.bz2) tar -tjf "$file" ;;
-        *.xz) tar -tJf "$file" ;;
-        *.tar) tar -tf "$file" ;;
-        *.tgz|*.tar.gz) tar -tzf "$file" ;;
-        *.tar.bz2) tar -tjf "$file" ;;
-        *.tar.xz) tar -tJf "$file" ;;
-        *.tar.7z) 7z l "$file" ;;
-        *) echo "Error: Unsupported file type" >&2; exit 1 ;;
-    esac
-}
+    read -r dependency list_flag extract_flag output_flag <<< "${file_types[$file_extension]}"
 
-extract_file() {
-    echo "Extracting $file to $output"
-    case "$file" in
-        *.7z) 7z x "$file" -o"$output" ;;
-        *.zip) unzip "$file" -d "$output" ;;
-        *.rar) unrar x "$file" "$output" ;;
-        *.gz) tar -xzf "$file" -C "$output" ;;
-        *.bz2) tar -xjf "$file" -C "$output" ;;
-        *.xz) tar -xJf "$file" -C "$output" ;;
-        *.tar) tar -xf "$file" -C "$output" ;;
-        *.tgz|*.tar.gz) tar -xzf "$file" -C "$output" ;;
-        *.tar.bz2) tar -xjf "$file" -C "$output" ;;
-        *.tar.xz) tar -xJf "$file" -C "$output" ;;
-        *.tar.7z) 7z x "$file" -o"$output" ;;
-        *) echo "Error: Unsupported file type" >&2; exit 1 ;;
+    if ! command -v "$dependency" &> /dev/null; then
+        echo "Error: $dependency is needed but not found." >&2
+        exit 1
+    fi
+
+    if [[ ! -f "$file" ]]; then
+        echo "Error: $file is not a valid file" >&2
+        exit 1
+    fi
+
+    if [[ ! -d "$output" ]]; then
+        mkdir -p "$output" || { echo "Error: '$output': Permission denied" >&2; exit 1; }
+    fi
+
+    case "$action" in
+        list) $dependency $list_flag "$file" ;;
+        extract)
+            if [[ -z "${output_flag:-}" ]]; then
+                $dependency $extract_flag "$file"
+            else
+                # Create a temporary directory to extract the contents
+                temp_dir=$(mktemp -d)
+                $dependency $extract_flag "$file" $output_flag "$temp_dir"
+
+                # Check if the contents are immediately inside a folder and move them accordingly
+                if [ $(find "$temp_dir" -maxdepth 1 -type d | wc -l) -gt 1 ]; then
+                    mkdir -p "$output/$(basename "$file" .$file_extension)"
+                    mv "$temp_dir"/* "$output/$(basename "$file" .$file_extension)"
+                else
+                    mv "$temp_dir"/* "$output"
+                fi
+
+                # Remove the temporary directory
+                rmdir "$temp_dir"
+            fi
+            ;;
     esac
 }
 
 main() {
-    local list_contents_flag=false
+    local action="extract"
+    local file=""
+    local output=""
+
     while [[ "$#" -gt 0 ]]; do
         case "$1" in
-            -l|--list) list_contents_flag=true; shift ;;
+            -l|--list) action="list"; shift ;;
             -h|--help) usage; exit 0 ;;
             --) shift; break ;;
             -*) echo "Error: Unknown option: $1" >&2; usage; exit 1 ;;
@@ -101,23 +126,7 @@ main() {
     file="$1"
     output="${2:-.}"
 
-    if [[ ! -f "$file" ]]; then
-        echo "Error: $file is not a valid file" >&2
-        exit 1
-    fi
-
-    if [[ ! -d "$output" ]]; then
-        mkdir -p "$output"
-    fi
-
-    file_extension="${file##*.}"
-    check_dependencies "$file_extension"
-
-    if [[ "$list_contents_flag" == true ]]; then
-        list_contents
-    else
-        extract_file
-    fi
+    process_file "$action" "$file" "$output"
 }
 
 main "$@"
