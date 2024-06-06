@@ -1,0 +1,123 @@
+#!/usr/bin/env bash
+#
+# -*- mode: shell-script -*-
+
+set -euo pipefail
+
+usage() {
+    cat << EOF
+Usage: $0 [options] <file> [<output>]
+Extracts the contents of a compressed file to a directory.
+
+Options:
+  -l, --list          List the contents of the file.
+  -h, --help          Show this help message and exit.
+
+If the output directory is not specified, the file is extracted to the current directory.
+
+Example:
+  $0 file.tar.gz
+  $0 file.tar.gz ~/Documents
+
+Supported file types:
+  .7z, .zip, .rar, .gz, .bz2, .xz, .tar, .tgz, .tar.gz, .tar.bz2, .tar.xz, .tar.7z
+EOF
+}
+
+check_dependencies() {
+    local file_extension="$1"
+    local dependency
+
+    case "$file_extension" in
+        *.7z) dependency="7z" ;;
+        *.zip) dependency="unzip" ;;
+        *.rar) dependency="unrar" ;;
+        *.gz|*.tgz|*.tar.gz) dependency="tar" ;;
+        *.bz2|*.tar.bz2) dependency="tar" ;;
+        *.xz|*.tar.xz) dependency="tar" ;;
+        *.tar) dependency="tar" ;;
+        *.tar.7z) dependency="7z" ;;
+    esac
+
+    if ! command -v "$dependency" &> /dev/null; then
+        echo "Error: $dependency is not installed." >&2
+        exit 1
+    fi
+}
+
+list_contents() {
+    case "$file" in
+        *.7z) 7z l "$file" ;;
+        *.zip) unzip -l "$file" ;;
+        *.rar) unrar l "$file" ;;
+        *.gz) tar -tzf "$file" ;;
+        *.bz2) tar -tjf "$file" ;;
+        *.xz) tar -tJf "$file" ;;
+        *.tar) tar -tf "$file" ;;
+        *.tgz|*.tar.gz) tar -tzf "$file" ;;
+        *.tar.bz2) tar -tjf "$file" ;;
+        *.tar.xz) tar -tJf "$file" ;;
+        *.tar.7z) 7z l "$file" ;;
+        *) echo "Error: Unsupported file type" >&2; exit 1 ;;
+    esac
+}
+
+extract_file() {
+    echo "Extracting $file to $output"
+    case "$file" in
+        *.7z) 7z x "$file" -o"$output" ;;
+        *.zip) unzip "$file" -d "$output" ;;
+        *.rar) unrar x "$file" "$output" ;;
+        *.gz) tar -xzf "$file" -C "$output" ;;
+        *.bz2) tar -xjf "$file" -C "$output" ;;
+        *.xz) tar -xJf "$file" -C "$output" ;;
+        *.tar) tar -xf "$file" -C "$output" ;;
+        *.tgz|*.tar.gz) tar -xzf "$file" -C "$output" ;;
+        *.tar.bz2) tar -xjf "$file" -C "$output" ;;
+        *.tar.xz) tar -xJf "$file" -C "$output" ;;
+        *.tar.7z) 7z x "$file" -o"$output" ;;
+        *) echo "Error: Unsupported file type" >&2; exit 1 ;;
+    esac
+}
+
+main() {
+    local list_contents_flag=false
+    while [[ "$#" -gt 0 ]]; do
+        case "$1" in
+            -l|--list) list_contents_flag=true; shift ;;
+            -h|--help) usage; exit 0 ;;
+            --) shift; break ;;
+            -*) echo "Error: Unknown option: $1" >&2; usage; exit 1 ;;
+            *) break ;;
+        esac
+    done
+
+    if [[ "$#" -lt 1 || "$#" -gt 2 ]]; then
+        echo "Error: Incorrect number of arguments" >&2
+        usage
+        exit 1
+    fi
+
+    file="$1"
+    output="${2:-.}"
+
+    if [[ ! -f "$file" ]]; then
+        echo "Error: $file is not a valid file" >&2
+        exit 1
+    fi
+
+    if [[ ! -d "$output" ]]; then
+        mkdir -p "$output"
+    fi
+
+    file_extension="${file##*.}"
+    check_dependencies "$file_extension"
+
+    if [[ "$list_contents_flag" == true ]]; then
+        list_contents
+    else
+        extract_file
+    fi
+}
+
+main "$@"

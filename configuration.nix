@@ -160,6 +160,7 @@
     steam-run
     devenv
     xdg-utils # Workaround for xdg-open, see: https://github.com/NixOS/nixpkgs/issues/145354
+    (import ./modules/scripts { inherit pkgs; }) # Custom scripts
     # davinci-resolve
     # (import ./fdm.nix)
   ];
