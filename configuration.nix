@@ -2,7 +2,12 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, options, ... }:
+{
+  config,
+  pkgs,
+  options,
+  ...
+}:
 
 {
   imports = [
@@ -69,6 +74,10 @@
     enable = true;
     powerOnBoot = true;
     input.General.ClassicBondedOnly = false;
+  };
+
+  environment.variables = rec {
+    VK_DRIVER_FILES = /run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json;
   };
 
   # Enable CUPS to print documents.
@@ -168,10 +177,12 @@
   # Enable nix-ld for jetbrains IDE's
   programs.nix-ld = {
     enable = true;
-    libraries = options.programs.nix-ld.libraries.default ++ (with pkgs; [ 
-      # Add missing dynamic libraries for unpackaged
-      # programs here, NOT in environment.systemPackages
-     ]);
+    libraries =
+      options.programs.nix-ld.libraries.default
+      ++ (with pkgs; [
+        # Add missing dynamic libraries for unpackaged
+        # programs here, NOT in environment.systemPackages
+      ]);
   };
 
   # Install firefox.
