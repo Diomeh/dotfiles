@@ -61,4 +61,4 @@ Contributions are welcome! Please open an issue or submit a pull request with yo
 
 ## License
 
-This repository is licensed under the MIT License. See the [LICENSE](./LICENSE.md) file for more information.
+This repository is licensed under the MIT License. See the [LICENSE](./LICENSE) file for more information.
