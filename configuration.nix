@@ -80,6 +80,11 @@
     VK_DRIVER_FILES = /run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json;
   };
 
+  environment.sessionVariables = {
+    # For proton GE
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/diomeh/.steam/root/compatibilitytools.d";
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -168,6 +173,10 @@
     steam-run
     devenv
     xdg-utils # Workaround for xdg-open, see: https://github.com/NixOS/nixpkgs/issues/145354
+    mangohud # Monitor system resource usage on games. mangohud %command% in Steam launch options
+    protonup # Proton GE
+    heroic # Heroic Games Launcher
+    bottles # Bottles Wine Manager 
     (import ./modules/scripts { inherit pkgs; }) # Custom scripts
     # davinci-resolve
     # (import ./fdm.nix)
@@ -195,7 +204,13 @@
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+
+    # Optimized micro-compositor for problems with upscaling and resolution
+    gamescopeSession.enable = true; # gamescope %command% in Steam launch options
   };
+
+  # Apply optimizations for better performance
+  programs.gamemode.enable = true; # gamemoderun %command% in Steam launch options
 
   # KDE Connect
   programs.kdeconnect.enable = true;
