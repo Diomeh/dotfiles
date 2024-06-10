@@ -2,7 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, options, ... }:
+{
+  config,
+  pkgs,
+  options,
+  inputs,
+  ...
+}:
 
 {
   imports = [
@@ -23,6 +29,9 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # IPV6 fails to connect and is unreachable from https://ipleak.net/, disable it for lack of better solution for now.
+  networking.enableIPv6 = false;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -72,6 +81,17 @@
     input.General.ClassicBondedOnly = false;
   };
 
+  environment.variables = rec {
+    VK_DRIVER_FILES = /run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json;
+  };
+
+  environment.sessionVariables = {
+    # For proton GE
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/diomeh/.steam/root/compatibilitytools.d";
+    # For nix helper
+    FLAKE = "/home/diomeh/dotfiles";
+  };
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -109,6 +129,13 @@
       kate
       thunderbird
     ];
+  };
+
+  home-manager = {
+    extraSpecialArgs = { inherit inputs; };
+    users = {
+      "diomeh" = import ./home.nix;
+    };
   };
 
   # Generate fontconfig file
@@ -153,7 +180,6 @@
     lshw
     lsof
     bruno
-    xclip
     beekeeper-studio
     libsForQt5.filelight
     vlc
@@ -161,6 +187,14 @@
     steam-run
     devenv
     xdg-utils # Workaround for xdg-open, see: https://github.com/NixOS/nixpkgs/issues/145354
+    mangohud # Monitor system resource usage on games. mangohud %command% in Steam launch options
+    protonup # Proton GE
+    heroic # Heroic Games Launcher
+    bottles # Bottles Wine Manager 
+    nh # Nix Helper
+    nix-output-monitor # Monitor nix builds
+    nvd # Nix Visual Debugger
+    (import ./modules/scripts { inherit pkgs; }) # Custom scripts
     # davinci-resolve
     # (import ./fdm.nix)
   ];
@@ -168,10 +202,12 @@
   # Enable nix-ld for jetbrains IDE's
   programs.nix-ld = {
     enable = true;
-    libraries = options.programs.nix-ld.libraries.default ++ (with pkgs; [ 
-      # Add missing dynamic libraries for unpackaged
-      # programs here, NOT in environment.systemPackages
-     ]);
+    libraries =
+      options.programs.nix-ld.libraries.default
+      ++ (with pkgs; [
+        # Add missing dynamic libraries for unpackaged
+        # programs here, NOT in environment.systemPackages
+      ]);
   };
 
   # Install firefox.
@@ -185,7 +221,13 @@
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+
+    # Optimized micro-compositor for problems with upscaling and resolution
+    gamescopeSession.enable = true; # gamescope %command% in Steam launch options
   };
+
+  # Apply optimizations for better performance
+  programs.gamemode.enable = true; # gamemoderun %command% in Steam launch options
 
   # KDE Connect
   programs.kdeconnect.enable = true;
@@ -268,6 +310,9 @@
 
   # List services that you want to enable:
   services.flatpak.enable = true;
+
+  # Enable fstrim timer to run weekly
+  services.fstrim.enable = true;
 
   # Hotspot related DNS resolver issue, systemd-resolved may be a working alternative
   # services.dnsmasq = {

@@ -69,6 +69,7 @@
         prime.offload.enableOffloadCmd = lib.mkForce true;
         prime.sync.enable = lib.mkForce false;
       };
+      environment.etc."specialisation".text = "on-the-go";
     };
   };
 }
