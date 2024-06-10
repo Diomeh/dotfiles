@@ -302,6 +302,9 @@
   # List services that you want to enable:
   services.flatpak.enable = true;
 
+  # Enable fstrim timer to run weekly
+  services.fstrim.enable = true;
+
   # Hotspot related DNS resolver issue, systemd-resolved may be a working alternative
   # services.dnsmasq = {
   #   enable = true;
