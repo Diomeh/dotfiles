@@ -28,6 +28,9 @@
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
+  # IPV6 fails to connect and is unreachable from https://ipleak.net/, disable it for lack of better solution for now.
+  networking.enableIPv6 = false;
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
