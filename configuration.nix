@@ -129,6 +129,13 @@
     ];
   };
 
+  home-manager = {
+    specialArgs = { inherit inputs; };
+    users = {
+      "diomeh" = import ./home.nix;
+    };
+  };
+
   # Generate fontconfig file
   fonts.fontconfig.enable = true;
   fonts.fontDir.enable = true;
