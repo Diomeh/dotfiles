@@ -83,6 +83,8 @@
   environment.sessionVariables = {
     # For proton GE
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/diomeh/.steam/root/compatibilitytools.d";
+    # For nix helper
+    FLAKE = "/etc/nixos";
   };
 
   # Enable CUPS to print documents.
@@ -177,6 +179,9 @@
     protonup # Proton GE
     heroic # Heroic Games Launcher
     bottles # Bottles Wine Manager 
+    nh # Nix Helper
+    nix-output-monitor # Monitor nix builds
+    nvd # Nix Visual Debugger
     (import ./modules/scripts { inherit pkgs; }) # Custom scripts
     # davinci-resolve
     # (import ./fdm.nix)
