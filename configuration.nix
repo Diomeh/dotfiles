@@ -6,6 +6,7 @@
   config,
   pkgs,
   options,
+  inputs,
   ...
 }:
 
@@ -87,7 +88,7 @@
     # For proton GE
     STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/diomeh/.steam/root/compatibilitytools.d";
     # For nix helper
-    FLAKE = "/etc/nixos";
+    FLAKE = "/home/diomeh/dotfiles";
   };
 
   # Enable CUPS to print documents.
@@ -130,7 +131,7 @@
   };
 
   home-manager = {
-    specialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs; };
     users = {
       "diomeh" = import ./home.nix;
     };
