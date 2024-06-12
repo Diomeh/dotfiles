@@ -209,6 +209,12 @@
       ]);
   };
 
+  # Enable direnv
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true; # Better integration with nix
+  };
+
   # Install firefox.
   programs.firefox.enable = true;
 
@@ -285,6 +291,7 @@
         "deno"
         "docker"
         "web-search"
+        "direnv"
       ];
     };
     shellAliases = {
