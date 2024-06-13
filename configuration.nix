@@ -141,6 +141,11 @@
   fonts.fontconfig.enable = true;
   fonts.fontDir.enable = true;
 
+  # Nerd Fonts
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+  ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -193,6 +198,7 @@
     nh # Nix Helper
     nix-output-monitor # Monitor nix builds
     nvd # Nix Visual Debugger
+    eza # Easy Archiver
     (import ./modules/scripts { inherit pkgs; }) # Custom scripts
     # davinci-resolve
     # (import ./fdm.nix)
@@ -295,7 +301,13 @@
       ];
     };
     shellAliases = {
-      ll = "ls -lA";
+      ls = "${pkgs.eza}/bin/eza --git --icons"; # Display icons and git status
+      l = "ls -lahbX"; # Long format, all files, show header, binary size prefix, dereference symlinks
+      ll = "ls -l"; # Long format
+      la = "ls -a"; # All files
+      lt = "ls --tree"; # Tree format
+      ldir = "l -D"; # Directories only
+      lfil = "l -f"; # Files only
     };
   };
 
