@@ -199,6 +199,10 @@
     nix-output-monitor # Monitor nix builds
     nvd # Nix Visual Debugger
     eza # Easy Archiver
+    libreoffice-qt
+    hunspell # Spell checker for LibreOffice
+    hunspellDicts.en_US # Spell checker english dictionary
+    hunspellDicts.es_VE # Spell checker sppanish dictionary
     (import ./modules/scripts { inherit pkgs; }) # Custom scripts
     # davinci-resolve
     # (import ./fdm.nix)
