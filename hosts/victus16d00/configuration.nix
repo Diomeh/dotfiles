@@ -14,10 +14,10 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./modules/nixos/nvidia.nix
-    ./modules/nixos/libvirt.nix
-    ./modules/nixos/samba.nix
-    ./modules/nixos/hyprland.nix
+    ../../modules/nixos/nvidia.nix
+    ../../modules/nixos/libvirt.nix
+    ../../modules/nixos/samba.nix
+    ../../modules/nixos/hyprland.nix
   ];
 
   nix.extraOptions = "experimental-features = nix-command flakes";
@@ -204,7 +204,7 @@
     hunspell # Spell checker for LibreOffice
     hunspellDicts.en_US # Spell checker english dictionary
     hunspellDicts.es_VE # Spell checker sppanish dictionary
-    (import ./modules/scripts { inherit pkgs; }) # Custom scripts
+    (import ../../modules/scripts { inherit pkgs; }) # Custom scripts
     # davinci-resolve
     # (import ./fdm.nix)
   ];
