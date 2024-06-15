@@ -4,7 +4,13 @@
   imports = [
     <nixpkgs/nixos/modules/installer/virtualbox-demo.nix>
     ./hardware-configuration.nix
+		../../modules/nixos/hyprland.nix
   ];
+
+	nvidia.modesetting.enable = false;
+
+  # Don't require password for sudo
+  security.sudo.wheelNeedsPassword = false;
 
   # Let demo build as a trusted user.
   # nix.settings.trusted-users = [ "demo" ];
@@ -37,6 +43,7 @@
     wget
     vim
     git
+		code
   ];
 
   # Enable the OpenSSH daemon.
