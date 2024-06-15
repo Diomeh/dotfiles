@@ -142,6 +142,11 @@
   fonts.fontconfig.enable = true;
   fonts.fontDir.enable = true;
 
+  # Nerd Fonts
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+  ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -194,10 +199,26 @@
     nh # Nix Helper
     nix-output-monitor # Monitor nix builds
     nvd # Nix Visual Debugger
+    eza # Easy Archiver
+    libreoffice-qt
+    hunspell # Spell checker for LibreOffice
+    hunspellDicts.en_US # Spell checker english dictionary
+    hunspellDicts.es_VE # Spell checker sppanish dictionary
     (import ./modules/scripts { inherit pkgs; }) # Custom scripts
     # davinci-resolve
     # (import ./fdm.nix)
   ];
+
+  # Enable VirtualBox
+  virtualisation.virtualbox = {
+    host.enable = true;
+    guest = {
+      enable = true;
+      draganddrop = true;
+      clipboard = true;
+    };
+  };
+  users.extraGroups.vboxusers.members = [ "diomeh" ];
 
   # Enable nix-ld for jetbrains IDE's
   programs.nix-ld = {
@@ -208,6 +229,12 @@
         # Add missing dynamic libraries for unpackaged
         # programs here, NOT in environment.systemPackages
       ]);
+  };
+
+  # Enable direnv
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true; # Better integration with nix
   };
 
   # Install firefox.
@@ -286,10 +313,17 @@
         "deno"
         "docker"
         "web-search"
+        "direnv"
       ];
     };
     shellAliases = {
-      ll = "ls -lA";
+      ls = "${pkgs.eza}/bin/eza --git --icons"; # Display icons and git status
+      l = "ls -lahbX"; # Long format, all files, show header, binary size prefix, dereference symlinks
+      ll = "ls -l"; # Long format
+      la = "ls -a"; # All files
+      lt = "ls --tree"; # Tree format
+      ldir = "l -D"; # Directories only
+      lfil = "l -f"; # Files only
     };
   };
 
