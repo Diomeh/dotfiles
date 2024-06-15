@@ -12,6 +12,9 @@
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
 
+	# Enable experimental features
+  nix.settings.experimental-features = ["nix-command" "flakes"];
+
   # Let demo build as a trusted user.
   # nix.settings.trusted-users = [ "demo" ];
 
