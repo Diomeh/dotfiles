@@ -4,13 +4,16 @@
   imports = [
     <nixpkgs/nixos/modules/installer/virtualbox-demo.nix>
     ./hardware-configuration.nix
-		../../modules/nixos/hyprland.nix
+		# ../../modules/nixos/hyprland.nix
   ];
 
-	nvidia.modesetting.enable = false;
+  #	nvidia.modesetting.enable = false;
 
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
+
+  # Enable unfree packages
+  nixpkgs.config.allowUnfree = true; 
 
 	# Enable experimental features
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -46,7 +49,7 @@
     wget
     vim
     git
-		code
+		vscode-fhs
   ];
 
   # Enable the OpenSSH daemon.
