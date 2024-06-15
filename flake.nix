@@ -13,6 +13,11 @@
   outputs = { self, nixpkgs, ... }@inputs: {
     # Match configuration name to system hostname for automatic selection
     nixosConfigurations = {
+	nixos = nixpkgs.lib.nixosSystem {
+		modules = [
+			./hosts/vm/configuration.nix
+		];
+	};
       victus16d00 = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
@@ -24,7 +29,6 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/vm/configuration.nix
-          inputs.home-manager.nixosModules.default
         ];
       };
     };
