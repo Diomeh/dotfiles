@@ -208,6 +208,17 @@
     # (import ./fdm.nix)
   ];
 
+  # Enable VirtualBox
+  virtualisation.virtualbox = {
+    host.enable = true;
+    guest = {
+      enable = true;
+      draganddrop = true;
+      clipboard = true;
+    };
+  };
+  users.extraGroups.vboxusers.members = [ "diomeh" ];
+
   # Enable nix-ld for jetbrains IDE's
   programs.nix-ld = {
     enable = true;
