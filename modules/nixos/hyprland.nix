@@ -1,7 +1,7 @@
 { pkgs, lib, inputs, ... }:
 
 let
-  use_nvidia_gpu = lib.mkDefault (lib.mkIf (lib.nvidia_x11.enable && lib.nvidia_x11.isAvailable) true false);
+  use_nvidia_gpu = config.boot.kernelPackages == pkgs.linuxPackages.nvidia_x11;
 in {
   # Enable hyprland cachix for home-manager module
   nix.settings = {
@@ -27,15 +27,6 @@ in {
     # Hint electron apps to use wayland
     NIXOS_OZONE_WL = "1";
   };
-
-  hardware.opengl = lib.mkIf use_nvidia_gpu {
-    enable = true;
-    # driSupport32Bit = true;
-    # driSupport64Bit = true;
-  };
-
-  # Wayland compositors require the modesetting driver
-  hardware.nvidia.modesetting.enable = lib.mkIf use_nvidia_gpu (lib.mkDefault true);
 
   environment.systemPackages = with pkgs; [
     (waybar.overrideAttrs (oldAttrs: {
