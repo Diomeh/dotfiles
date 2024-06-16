@@ -1,6 +1,8 @@
 { pkgs, lib, inputs, ... }:
 
-{
+let
+  use_nvidia_gpu = lib.mkDefault (lib.mkIf (lib.nvidia_x11.enable && lib.nvidia_x11.isAvailable) true false);
+in {
   # Enable hyprland cachix for home-manager module
   nix.settings = {
     substituters = ["https://hyprland.cachix.org"];
@@ -10,50 +12,45 @@
   # Enable Hyprland
   programs.hyprland = {
     enable = true;
-    # nvidiaPatches = true;
     xwayland.enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
 
-  environment = {
-    sessionVariables = {
-#      WAYLAND_DISPLAY = ":1";
-      XDG_SESSION_TYPE = "wayland";
-      XDG_SESSION_DESKTOP = "hyprland";
+  environment.sessionVariables = lib.mkIf use_nvidia_gpu {
+    # WAYLAND_DISPLAY = ":1";
+    XDG_SESSION_TYPE = "wayland";
+    XDG_SESSION_DESKTOP = "hyprland";
 
-      # Prevent invisible cursor
-      WLR_NO_HARDWARE_CURSORS = "1";
+    # Prevent invisible cursor
+    WLR_NO_HARDWARE_CURSORS = "1";
 
-      # Hint electron apps to use wayland
-      NIXOS_OZONE_WL = "1";
-    };
-
-    systemPackages = with pkgs; [
-      (waybar.overrideAttrs (oldAttrs: {
-        mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
-      }))
-      libnotify
-      dunst # Notification daemon
-      swww # Sway wallpaper
-      kitty # Terminal emulator
-      rofi-wayland # Application launcher
-      networkmanagerapplet # Network manager applet
-      grim # Screenshot tool
-      slurp # Select tool
-      wl-clipboard # Clipboard manager
-    ];
+    # Hint electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
   };
 
-  hardware = {
-    opengl = {
-      enable = true;
-      # driSupport32Bit = true;
-      # driSupport64Bit = true;
-    };
-
-    # Wayland compositors require the modesetting driver
-    nvidia.modesetting.enable = lib.mkDefault true;
+  hardware.opengl = lib.mkIf use_nvidia_gpu {
+    enable = true;
+    # driSupport32Bit = true;
+    # driSupport64Bit = true;
   };
+
+  # Wayland compositors require the modesetting driver
+  hardware.nvidia.modesetting.enable = lib.mkIf use_nvidia_gpu (lib.mkDefault true);
+
+  environment.systemPackages = with pkgs; [
+    (waybar.overrideAttrs (oldAttrs: {
+      mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
+    }))
+    libnotify
+    dunst # Notification daemon
+    swww # Sway wallpaper
+    kitty # Terminal emulator
+    rofi-wayland # Application launcher
+    networkmanagerapplet # Network manager applet
+    grim # Screenshot tool
+    slurp # Select tool
+    wl-clipboard # Clipboard manager
+  ];
 
   # Disable KDE forcefully
   services.xserver.desktopManager.plasma5.enable = lib.mkForce false;
