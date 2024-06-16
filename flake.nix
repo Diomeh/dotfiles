@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
@@ -24,6 +25,7 @@
         specialArgs = {inherit inputs;};
         modules = [
           ./hosts/vm/configuration.nix
+          inputs.home-manager.nixosModules.default
         ];
       };
     };

@@ -1,13 +1,14 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
     <nixpkgs/nixos/modules/installer/virtualbox-demo.nix>
     ./hardware-configuration.nix
-		# ../../modules/nixos/hyprland.nix
+		../../modules/nixos/hyprland.nix
   ];
 
-  #	nvidia.modesetting.enable = false;
+  # Enabled in hyprland.nix
+  # hardware.nvidia.modesetting.enable = false;
 
   # Don't require password for sudo
   security.sudo.wheelNeedsPassword = false;
