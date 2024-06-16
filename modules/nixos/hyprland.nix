@@ -1,4 +1,4 @@
-{ pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, ... }:
 
 let
   use_nvidia_gpu = config.boot.kernelPackages == pkgs.linuxPackages.nvidia_x11;
