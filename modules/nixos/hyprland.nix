@@ -10,7 +10,7 @@ in {
   };
 
   # nvidia specific session variables
-  environment.sessionVariables = lib.mkIf use_nvidia_gp {
+  environment.sessionVariables = lib.mkIf use_nvidia_gpu {
     # WAYLAND_DISPLAY = ":1";
     XDG_SESSION_TYPE = "wayland";
     XDG_SESSION_DESKTOP = "hyprland";
