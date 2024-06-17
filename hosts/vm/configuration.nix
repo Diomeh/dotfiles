@@ -50,17 +50,14 @@
   # Enable SDDM display manager
   services.displayManager.sddm.enable = true;
 
-  # Enable GNOME DE
-  services.xserver.desktopManager.gnome.enable = false;
+  # Enable KDE 5
+  services.xserver.desktopManager.plasma5.enable = false;
 
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
     variant = "altgr-intl";
   };
-
-  # Enable unfree packages
-  nixpkgs.config.allowUnfree = true;
 
 	# Enable experimental features
   nix.settings.experimental-features = ["nix-command" "flakes"];
@@ -93,22 +90,23 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.user = {
+  users.users.diomeh = {
     isNormalUser = true;
-    description = "user";
+    description = "diomeh";
     extraGroups = [ "networkmanager" "wheel" ];
     shell = pkgs.zsh;
-    packages = with pkgs; [
-    #  thunderbird
-    ];
+    packages = with pkgs; [];
   };
 
-  # Workaround for GNOME autologin: https://github.com/NixOS/nixpkgs/issues/103746#issuecomment-945091229
-#   systemd.services."getty@tty1".enable = false;
-#   systemd.services."autovt@tty1".enable = false;
+  # Enable automatic login for the user.
+  services.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.user = "diomeh";
 
   # Install firefox.
   programs.firefox.enable = true;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -157,7 +155,7 @@
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      "user" = import ./home.nix;
+      "diomeh" = import ./home.nix;
     };
   };
 
