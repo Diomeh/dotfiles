@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "demo";
-  home.homeDirectory = "/home/demo";
+  home.username = "user";
+  home.homeDirectory = "/home/user";
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -16,7 +16,32 @@
   home.stateVersion = "24.05"; # Please read the comment before changing.
 
   # Enable hyprland
-  wayland.windowManager.hyprland.enable = true;
+  wayland.windowManager.hyprland = {
+    enable = true;
+    settings = {
+      "$mod" = "SUPER";
+      bind = [
+        "$mod, F, exec, firefox"
+        ", Print, exec, grimblast copy area"
+      ]
+#       ++ (
+#         # Workspaces
+#         builtins.concatLists ( builtins.genList (
+#           x: let
+#             ws = let
+#               c = (x + 1) / 10;
+#             in
+#             builtins.toString (x + 1 - (c * 10));
+#           in [
+#             "$mod , $(ws), workspace, $(toString (x + 1))"
+#             "$mod SHIFT, $(ws), movetoworkspace, $(toString (x + 1))"
+#           ]
+#         )
+#         10)
+#       )
+      ;
+    };
+  };
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
