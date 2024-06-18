@@ -3,23 +3,6 @@
 
 This repository contains the configuration files and modules for setting up and managing a NixOS system.
 
-## Repository Structure
-
-```
-├── configuration.nix
-├── flake.lock
-├── flake.nix
-├── hardware-configuration.nix
-├── modules: Directory containing custom NixOS modules and scripts.
-│   ├── nixos: Specific NixOS module configurations.
-│   │   ├── ...
-│   └── scripts: Utility scripts.
-│       ├── default.nix: Nix expression for building the scripts.
-│       └── src: Source directory for the utility scripts.
-│           ├── ...
-├── README.md
-```
-
 ## Getting Started
 
 ### Prerequisites
