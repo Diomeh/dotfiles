@@ -1,6 +1,8 @@
 { ... }:
 
 {
+  # Enable the Samba service.
+  # TODO: add comments to explain the configuration
   services.samba = {
     enable = true;
     securityType = "user";
