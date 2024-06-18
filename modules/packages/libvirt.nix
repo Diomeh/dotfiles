@@ -1,8 +1,12 @@
 { pkgs, ... }:
 {
+  # Enable libvirt virtualisation
   virtualisation = {
     libvirtd = {
+      # Enable the libvirt daemon
       enable = true;
+
+      # Enable the QEMU/KVM hypervisor
       qemu = {
         package = pkgs.qemu_kvm;
         swtpm.enable = true;
@@ -11,11 +15,16 @@
       };
       extraConfig = ''uri_default = "qemu:///system"'';
     };
+
+    # Enable SPICE USB redirection
     spiceUSBRedirection.enable = true;
   };
 
+  # Add the current user to the libvirt group
+  # TODO: move user to a separate file
   users.users.diomeh.extraGroups = [ "libvirtd" ];
 
+  # Add the necessary packages for virtio and SPICE support
   environment.systemPackages = with pkgs; [
     spice
     spice-gtk
@@ -30,8 +39,10 @@
     virtiofsd
   ];
 
+  # Enable the virt-manager GUI
   programs.dconf.enable = true;
   programs.virt-manager.enable = true;
 
+  # Enable the SPICE VDagent
   services.spice-vdagentd.enable = true;
 }

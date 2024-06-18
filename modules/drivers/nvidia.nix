@@ -6,18 +6,23 @@
 }:
 
 {
-  # Enable OpenGL
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
-  };
+  # Add Nvidia kernel module to the initrd
+	# boot = {
+	# 	extraModulePackages = [ config.boot.kernelPackages.nvidia_x11_beta ];
+	# 	initrd.kernelModules = [ "nvidia" ];
+	# 	kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+	# };
+
+  # Install Nvidia drivers and CUDA toolkit
+	# environment.systemPackages = with pkgs; [
+  #   linuxPackages.nvidia_x11
+  #   cudaPackages.cudatoolkit
+  # ];
 
   # Load nvidia driver for Xorg and Wayland
   services.xserver.videoDrivers = [ "nvidia" ];
 
   hardware.nvidia = {
-
     # Modesetting is required.
     modesetting.enable = true;
 
@@ -46,30 +51,17 @@
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
     package = config.boot.kernelPackages.nvidiaPackages.stable;
 
-    # Enable NVIDIA Optimus PRIME
+    # Enable NVIDIA Optimus PRIME sync
+    # Better GPU performance at the cost of battery
     prime = {
       # Set PRIME Sync on by default
-      # Better GPU performance at the cost of battery
       sync.enable = true;
 
       # Make sure to use the correct Bus ID values for your system!
+      # Run `lspci | grep VGA` to find the correct Bus ID values
+      # TODO: move values to config file and read from there
       intelBusId = "PCI:0:2:0";
       nvidiaBusId = "PCI:1:0:0";
-    };
-  };
-
-  # On the go specialization
-  # GPU sleeps by default and is only used when explicitly requested
-  # GPU intensive applications must be run through ~/nvidia-offload script
-  specialisation = {
-    on-the-go.configuration = {
-      system.nixos.tags = [ "on-the-go" ];
-      hardware.nvidia = {
-        prime.offload.enable = lib.mkForce true;
-        prime.offload.enableOffloadCmd = lib.mkForce true;
-        prime.sync.enable = lib.mkForce false;
-      };
-      environment.etc."specialisation".text = "on-the-go";
     };
   };
 }
