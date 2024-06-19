@@ -29,7 +29,8 @@
     ../../modules/settings/x11.nix
 
     # Import DE
-    ../../modules/settings/desktops/kde5.nix
+    # ../../modules/settings/desktops/kde5.nix
+    ../../modules/settings/desktops/kde6.nix
     # ../../modules/settings/desktops/hyprland.nix
 
     # Import packages
