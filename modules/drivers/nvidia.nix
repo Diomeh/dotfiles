@@ -6,14 +6,18 @@
 }:
 
 {
-  # Add Nvidia kernel module to the initrd
-	# boot = {
-	# 	extraModulePackages = [ config.boot.kernelPackages.nvidia_x11_beta ];
-	# 	initrd.kernelModules = [ "nvidia" ];
-	# 	kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
-	# };
+	boot = {
+    # Add Nvidia beta kernel module to the initrd
+		extraModulePackages = [ config.boot.kernelPackages.nvidia_x11_beta ];
+		initrd.kernelModules = [ "nvidia" ];
 
-  # Install Nvidia drivers and CUDA toolkit
+    # Preserve video memory after suspend/resume cycles to avoid graphical corruption
+    # TODO: is not clear if this actually works, see https://wiki.archlinux.org/title/NVIDIA/Tips_and_tricks#Preserve_video_memory_after_suspend
+		kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+	};
+
+  # Nvidia CUDA toolkit
+  # FIXME: should be moved to a separate module, requires a lot of dependencies, see https://nixos.wiki/wiki/CUDA
 	# environment.systemPackages = with pkgs; [
   #   linuxPackages.nvidia_x11
   #   cudaPackages.cudatoolkit
@@ -49,7 +53,7 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
 
     # Enable NVIDIA Optimus PRIME sync
     # Better GPU performance at the cost of battery
