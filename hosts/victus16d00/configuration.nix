@@ -11,7 +11,7 @@
     # Import drivers
     ../../modules/drivers/opengl.nix
     ../../modules/drivers/nvidia.nix
-    # ../../modules/drivers/power-management.nix
+    ../../modules/drivers/power-management.nix
 
     # Import users
     ../../modules/users/diomeh.nix
