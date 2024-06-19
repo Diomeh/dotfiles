@@ -65,12 +65,7 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Define your hostname.
-  networking.hostName = "victus16d00"; 
-
-  environment.variables = {
-    # TODO: find out what does this variable do
-    VK_DRIVER_FILES = /run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json;
-  };
+  networking.hostName = "victus16d00";
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
