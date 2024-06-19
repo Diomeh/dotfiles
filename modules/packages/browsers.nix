@@ -4,6 +4,7 @@
     brave
     microsoft-edge
     google-chrome
+    opera
   ];
 
   # Install firefox.
