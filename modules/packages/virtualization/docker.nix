@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   # Enable docker daemon
   # This does not enables docker desktop as it is not available on NixOS.
@@ -8,4 +8,7 @@
   # Add the current user to the docker group
   # TODO: move user to a separate file
   users.users.diomeh.extraGroups = [ "docker" ];
+
+  # Force disable docker service so that it is not started at boot
+  systemd.services.docker.wantedBy = lib.mkForce [];
 }

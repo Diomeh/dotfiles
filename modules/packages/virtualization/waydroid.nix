@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   # WayDroid requires a Wayland desktop session and cannot be used on X11 directly, but can be run in a nested Wayland session, using e.g. cage.
   # See https://www.hjdskes.nl/projects/cage
@@ -14,4 +14,7 @@
 
   # If clipboard sharing is desired, wl-clipboard is required
   environment.systemPackages = with pkgs; [ wl-clipboard ];
+
+  # Force disable waydroid service so that it is not started at boot
+  systemd.services.waydroid-container.wantedBy = lib.mkForce [];
 }
