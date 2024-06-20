@@ -14,7 +14,7 @@
     ../../modules/drivers/power-management.nix
 
     # Import users
-    ../../modules/users/diomeh.nix
+    ../../modules/users
 
     # Import settings
     ../../modules/settings/bluetooth.nix

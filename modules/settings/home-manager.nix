@@ -1,11 +1,15 @@
 { inputs, ... }:
+let
+  # TODO: read user from a separate file
+  username = "diomeh";
+  hostname = "victus16d00";
+in
 {
   # home-manager configuration
   home-manager = {
     extraSpecialArgs = { inherit inputs; };
     users = {
-      # TODO: read user from a separate file
-      "diomeh" = import ../../hosts/victus16d00/home.nix;
+      "${username}" = import ../../hosts/${hostname}/home.nix;
     };
   };
 }

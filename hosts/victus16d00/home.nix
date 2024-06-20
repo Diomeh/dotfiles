@@ -1,10 +1,12 @@
 { config, pkgs, ... }:
-
+let
+  username = "diomeh";
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "diomeh";
-  home.homeDirectory = "/home/diomeh";
+  home.username = "${username}";
+  home.homeDirectory = "/home/${username}";
 
   # wayland.windowManager.hyprland.enable = true;
   # wayland.windowManager.hyprland.settings = {
@@ -91,7 +93,7 @@
   #
   # or
   #
-  #  /etc/profiles/per-user/diomeh/etc/profile.d/hm-session-vars.sh
+  #  /etc/profiles/per-user/${username}/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
     # EDITOR = "emacs";

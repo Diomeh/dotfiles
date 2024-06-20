@@ -1,4 +1,7 @@
 { pkgs, lib, ... }:
+let
+  username = "diomeh";
+in
 {
   # Enable libvirt virtualisation
   virtualisation = {
@@ -22,7 +25,7 @@
 
   # Add the current user to the libvirt group
   # TODO: move user to a separate file
-  users.users.diomeh.extraGroups = [ "libvirtd" ];
+  users.users."${username}".extraGroups = [ "libvirtd" ];
 
   # Add the necessary packages for virtio and SPICE support
   environment.systemPackages = with pkgs; [

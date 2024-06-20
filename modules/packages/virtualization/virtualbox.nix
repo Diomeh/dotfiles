@@ -1,4 +1,7 @@
 { ... }:
+let
+  username = "diomeh";
+in
 {
   # Enable VirtualBox
   virtualisation.virtualbox = {
@@ -18,5 +21,5 @@
 
   # Add the current user to the vboxusers group
   # TODO: move user to a separate file
-  users.extraGroups.vboxusers.members = [ "diomeh" ];
+  users.extraGroups.vboxusers.members = [ "${username}" ];
 }

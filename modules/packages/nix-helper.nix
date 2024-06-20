@@ -1,9 +1,12 @@
 { pkgs, ... }:
+let
+  username = "diomeh";
+in
 {
   environment.sessionVariables = {
     # For nix helper
     # TODO: read this from a separate file
-    FLAKE = "/home/diomeh/dotfiles";
+    FLAKE = "/home/${username}/dotfiles";
   };
 
   environment.systemPackages = with pkgs; [
