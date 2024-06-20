@@ -11,5 +11,6 @@
     dbeaver-bin # SQL GUI
     kate # Kate text editor
     sublime4 # Sublime Text
+    zed-editor # Zed text editor
   ];
 }
