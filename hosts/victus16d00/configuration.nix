@@ -37,7 +37,6 @@
     ../../modules/packages/browsers.nix
     ../../modules/packages/development.nix
     ../../modules/packages/direnv.nix
-    ../../modules/packages/gaming.nix
     ../../modules/packages/misc.nix
     ../../modules/packages/mullvad.nix
     ../../modules/packages/nix-helper.nix
@@ -45,10 +44,15 @@
     ../../modules/packages/office.nix
     ../../modules/packages/package-managers.nix
     ../../modules/packages/samba.nix
-    ../../modules/packages/steam.nix
     ../../modules/packages/sys-utils.nix
-    ../../modules/packages/wine.nix
     ../../modules/packages/zsh.nix
+
+    # Gaming related stuff
+    ../../modules/packages/gaming/launchers.nix
+    ../../modules/packages/gaming/steam.nix
+    ../../modules/packages/gaming/wine.nix
+
+    # Virtualization
     ../../modules/packages/virtualization/docker.nix
     ../../modules/packages/virtualization/libvirt.nix
     ../../modules/packages/virtualization/virtualbox.nix
