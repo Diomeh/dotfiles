@@ -37,9 +37,7 @@
     ../../modules/packages/browsers.nix
     ../../modules/packages/development.nix
     ../../modules/packages/direnv.nix
-    ../../modules/packages/docker.nix
     ../../modules/packages/gaming.nix
-    ../../modules/packages/libvirt.nix
     ../../modules/packages/misc.nix
     ../../modules/packages/mullvad.nix
     ../../modules/packages/nix-helper.nix
@@ -49,9 +47,12 @@
     ../../modules/packages/samba.nix
     ../../modules/packages/steam.nix
     ../../modules/packages/sys-utils.nix
-    ../../modules/packages/virtualbox.nix
     ../../modules/packages/wine.nix
     ../../modules/packages/zsh.nix
+    ../../modules/packages/virtualization/docker.nix
+    ../../modules/packages/virtualization/libvirt.nix
+    ../../modules/packages/virtualization/virtualbox.nix
+    ../../modules/packages/virtualization/waydroid.nix
 
     # Import specialisations
     ../../modules/specialisations/on-the-go.nix
