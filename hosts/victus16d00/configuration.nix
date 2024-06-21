@@ -25,6 +25,7 @@
     ../../modules/settings/home-manager.nix
     ../../modules/settings/locales.nix
     ../../modules/settings/network.nix
+    ../../modules/settings/numlock.nix
     ../../modules/settings/sound.nix
     ../../modules/settings/x11.nix
 
