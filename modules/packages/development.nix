@@ -5,6 +5,7 @@
     jetbrains-toolbox # JetBrains Toolbox
     gitkraken # GitKraken Git GUI
     rustup # Rust programming language
+    bacon # Background rust code checker
     glab # GitLab CLI
     bruno # API testing tool
     beekeeper-studio # SQL GUI
