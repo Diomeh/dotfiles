@@ -28,5 +28,16 @@
         ];
       };
     };
+
+    homeConfigurations = {
+      victus16d00 = inputs.home-manager.lib.homeManagerConfiguration {
+        inherit inputs;
+        configuration = ./hosts/victus16d00/home.nix;
+      };
+      vm = inputs.home-manager.lib.homeManagerConfiguration {
+        inherit inputs;
+        configuration = ./hosts/vm/home.nix;
+      };
+    };
   };
 }

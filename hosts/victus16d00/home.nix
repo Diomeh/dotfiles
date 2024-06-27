@@ -79,6 +79,46 @@ in
     # '';
   };
 
+  # Kitty terminal emulator
+  # See: 
+  # - https://github.com/nix-community/home-manager/blob/master/modules/programs/kitty.nix
+  # - https://sw.kovidgoyal.net/kitty/conf.html
+  programs.kitty = {
+    enable = true;
+    theme = "Space Gray Eighties";
+    shellIntegration.enableZshIntegration = true;
+    font = {
+      name = "Fira Code";
+      size = 12;
+      package = pkgs.fira-code;
+    };
+    settings = {
+      disable_ligatures = "always";
+      cursor_shape = "beam";
+      scrollback_pager_history_size = 1024;
+      scrollback_fill_enlarged_window = "yes";
+      mouse_hide_wait = 0;
+      show_hyperlink_targets = "yes";
+      underline_hyperlinks = "always";
+      paste_actions = "quote-urls-at-prompt,confirm,replace-dangerous-control-codes,replace-newline,filter";
+      strip_trailing_spaces = "always";
+      confirm_os_window_close = 0;
+      notify_on_cmd_finish = "unfocused";
+      wayland_enable_ime = "no";
+    };
+    keybindings = {
+      "ctrl+shift+c" = "copy_to_clipboard";
+      "ctrl+c" = "copy_or_interrupt";
+      "ctrl+v" = "paste_from_clipboard";
+      "ctrl+shift+enter" = "new_window_with_cwd";
+      "ctrl+shift+n" = "new_os_window_with_cwd";
+    };
+    environment = {};
+    extraConfig = ''
+      # Add your custom kitty configuration here
+    '';
+  };
+
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
