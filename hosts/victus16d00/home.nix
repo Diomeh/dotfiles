@@ -87,11 +87,18 @@ in
   # - https://sw.kovidgoyal.net/kitty/conf.html
   programs.kitty = {
     enable = true;
-    theme = "Space Gray Eighties";
+
+    # INFO: Apparently kitty doesn't support scrollbar?? Why? May be a dealbreaker.
+    # See: https://github.com/kovidgoyal/kitty/issues/2502#issuecomment-606996263
+
+    # https://github.com/kovidgoyal/kitty-themes
+    # https://sw.kovidgoyal.net/kitty/kittens/themes/
+    theme = "VSCode_Dark";
+
     shellIntegration.enableZshIntegration = true;
     font = {
       name = "Fira Code";
-      size = 12;
+      size = 11;
       package = pkgs.fira-code;
     };
     settings = {
@@ -107,6 +114,10 @@ in
       confirm_os_window_close = 0;
       notify_on_cmd_finish = "unfocused";
       wayland_enable_ime = "no";
+      tab_bar_edge = "top";
+      tab_bar_min_tabs = 1;
+      tab_bar_style = "slant";
+      tab_activity_symbol = "•";
     };
     keybindings = {
       "ctrl+shift+c" = "copy_to_clipboard";
@@ -114,6 +125,12 @@ in
       "ctrl+v" = "paste_from_clipboard";
       "ctrl+shift+enter" = "new_window_with_cwd";
       "ctrl+shift+n" = "new_os_window_with_cwd";
+      "ctrl+shift+t" = "new_tab_with_cwd";
+
+      # Keybinding sucks absolute ass
+      # either it clears scrollback and I'm forced to press enter
+      # or just clear the screen pushing everything to scrollback which is same as ctrl+l 
+      "ctrl+shift+k" = "clear_terminal clear active";
     };
     environment = { };
     extraConfig = ''
@@ -156,6 +173,12 @@ in
 
     # Extra commands that should be added to {file}.zshrc.
     initExtra = ''
+      # ctrl + backspace to delete word
+      bindkey '^H' backward-kill-word
+
+      # ctrl + delete to delete word
+      bindkey '^[[3;5~' kill-word
+
       # Disable user@system in shell prompt
       prompt_context(){}
 
