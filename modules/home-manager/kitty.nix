@@ -50,6 +50,9 @@
       # either it clears scrollback and I'm forced to press enter
       # or just clear the screen pushing everything to scrollback which is same as ctrl+l 
       "ctrl+shift+k" = "clear_terminal scrollback active";
+
+      # Fix ctrl+l so that it pushes content on screen to scrollback
+      "ctrl+l" = "clear_terminal to_cursor_scroll active";
     };
     environment = { };
     extraConfig = ''
