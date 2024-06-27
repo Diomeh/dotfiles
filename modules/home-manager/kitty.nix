@@ -49,7 +49,7 @@
       # Keybinding sucks absolute ass
       # either it clears scrollback and I'm forced to press enter
       # or just clear the screen pushing everything to scrollback which is same as ctrl+l 
-      "ctrl+shift+k" = "clear_terminal clear active";
+      "ctrl+shift+k" = "clear_terminal scrollback active";
     };
     environment = { };
     extraConfig = ''
