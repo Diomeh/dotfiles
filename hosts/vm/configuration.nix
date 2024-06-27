@@ -2,59 +2,65 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, ... }:
+{ ... }:
 
 {
   imports = [
     ./hardware-configuration.nix
 
     # Import drivers
-    ../../modules/drivers/opengl.nix
-#     ../../modules/drivers/nvidia.nix
-#     ../../modules/drivers/power-management.nix
+    ../../modules/nixos/drivers/opengl.nix
+    # ../../modules/nixos/drivers/nvidia.nix
+    # ../../modules/nixos/drivers/power-management.nix
 
     # Import users
-    ../../modules/users/diomeh.nix
+    ../../modules/nixos/users
 
     # Import settings
-    ../../modules/settings/bluetooth.nix
-    ../../modules/settings/cups.nix
-#     ../../modules/settings/firewall.nix
-    ../../modules/settings/fonts.nix
-#     ../../modules/settings/fstrim.nix
-    ../../modules/settings/home-manager.nix
-    ../../modules/settings/locales.nix
-    ../../modules/settings/network.nix
-    ../../modules/settings/sound.nix
-    ../../modules/settings/x11.nix
+    # ../../modules/nixos/settings/bluetooth.nix
+    # ../../modules/nixos/settings/cups.nix
+    # ../../modules/nixos/settings/firewall.nix
+    ../../modules/nixos/settings/fonts.nix
+    # ../../modules/nixos/settings/fstrim.nix
+    ../../modules/nixos/settings/home-manager.nix
+    ../../modules/nixos/settings/locales.nix
+    ../../modules/nixos/settings/network.nix
+    # ../../modules/nixos/settings/numlock.nix
+    ../../modules/nixos/settings/sound.nix
+    ../../modules/nixos/settings/x11.nix
 
     # Import DE
-    # ../../modules/settings/desktops/kde5.nix
-    ../../modules/settings/desktops/kde6.nix
-    # ../../modules/settings/desktops/hyprland.nix
+    # ../../modules/nixos/settings/desktops/kde5.nix
+    ../../modules/nixos/settings/desktops/kde6.nix
+    # ../../modules/nixos/settings/desktops/hyprland.nix
 
     # Import packages
-    ../../modules/packages/browsers.nix
-    ../../modules/packages/development.nix
-#     ../../modules/packages/direnv.nix
-#     ../../modules/packages/docker.nix
-#     ../../modules/packages/gaming.nix
-#     ../../modules/packages/libvirt.nix
-    ../../modules/packages/misc.nix
-#     ../../modules/packages/mullvad.nix
-    ../../modules/packages/nix-helper.nix
-    ../../modules/packages/nix-ld.nix
-#     ../../modules/packages/office.nix
-    ../../modules/packages/package-managers.nix
-#     ../../modules/packages/samba.nix
-#     ../../modules/packages/steam.nix
-    ../../modules/packages/sys-utils.nix
-#     ../../modules/packages/virtualbox.nix
-#     ../../modules/packages/wine.nix
-    ../../modules/packages/zsh.nix
+    ../../modules/nixos/packages/browsers.nix
+    ../../modules/nixos/packages/development.nix
+    ../../modules/nixos/packages/direnv.nix
+    ../../modules/nixos/packages/misc.nix
+    # ../../modules/nixos/packages/mullvad.nix
+    ../../modules/nixos/packages/nix-helper.nix
+    ../../modules/nixos/packages/nix-ld.nix
+    # ../../modules/nixos/packages/office.nix
+    ../../modules/nixos/packages/package-managers.nix
+    # ../../modules/nixos/packages/samba.nix
+    ../../modules/nixos/packages/sys-utils.nix
+    ../../modules/nixos/packages/zsh.nix
+
+    # Gaming related stuff
+    # ../../modules/nixos/packages/gaming/launchers.nix
+    # ../../modules/nixos/packages/gaming/steam.nix
+    # ../../modules/nixos/packages/gaming/wine.nix
+
+    # Virtualization
+    # ../../modules/nixos/packages/virtualization/docker.nix
+    # ../../modules/nixos/packages/virtualization/libvirt.nix
+    # ../../modules/nixos/packages/virtualization/virtualbox.nix
+    # ../../modules/nixos/packages/virtualization/waydroid.nix
 
     # Import specialisations
-#     ../../modules/specialisations/on-the-go.nix
+    # ../../modules/nixos/specialisations/on-the-go.nix
   ];
 
   # Bootloader.
@@ -67,6 +73,9 @@
 
   # Define your hostname.
   networking.hostName = "vm";
+
+  # Needed for home-manager ZSH completion
+  environment.pathsToLink = [ "/share/zsh" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -94,5 +103,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
