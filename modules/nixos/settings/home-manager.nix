@@ -18,7 +18,7 @@ in
     backupFileExtension = "backup"; 
 
     users = {
-      "${username}" = import ../../hosts/${hostname}/home.nix;
+      "${username}" = import ../../../hosts/${hostname}/home.nix;
     };
   };
 }
