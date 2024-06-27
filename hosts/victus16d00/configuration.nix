@@ -14,7 +14,7 @@
     ../../modules/drivers/power-management.nix
 
     # Import users
-    ../../modules/users/diomeh.nix
+    ../../modules/users
 
     # Import settings
     ../../modules/settings/bluetooth.nix
@@ -25,6 +25,7 @@
     ../../modules/settings/home-manager.nix
     ../../modules/settings/locales.nix
     ../../modules/settings/network.nix
+    ../../modules/settings/numlock.nix
     ../../modules/settings/sound.nix
     ../../modules/settings/x11.nix
 
@@ -37,9 +38,6 @@
     ../../modules/packages/browsers.nix
     ../../modules/packages/development.nix
     ../../modules/packages/direnv.nix
-    ../../modules/packages/docker.nix
-    ../../modules/packages/gaming.nix
-    ../../modules/packages/libvirt.nix
     ../../modules/packages/misc.nix
     ../../modules/packages/mullvad.nix
     ../../modules/packages/nix-helper.nix
@@ -47,11 +45,19 @@
     ../../modules/packages/office.nix
     ../../modules/packages/package-managers.nix
     ../../modules/packages/samba.nix
-    ../../modules/packages/steam.nix
     ../../modules/packages/sys-utils.nix
-    ../../modules/packages/virtualbox.nix
-    ../../modules/packages/wine.nix
     ../../modules/packages/zsh.nix
+
+    # Gaming related stuff
+    ../../modules/packages/gaming/launchers.nix
+    ../../modules/packages/gaming/steam.nix
+    ../../modules/packages/gaming/wine.nix
+
+    # Virtualization
+    ../../modules/packages/virtualization/docker.nix
+    ../../modules/packages/virtualization/libvirt.nix
+    ../../modules/packages/virtualization/virtualbox.nix
+    ../../modules/packages/virtualization/waydroid.nix
 
     # Import specialisations
     ../../modules/specialisations/on-the-go.nix
@@ -66,6 +72,9 @@
 
   # Define your hostname.
   networking.hostName = "victus16d00";
+
+  # Needed for home-manager ZSH completion
+  environment.pathsToLink = [ "/share/zsh" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
