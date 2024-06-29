@@ -5,6 +5,15 @@
     qbittorrent # A free and open-source BitTorrent client
     vlc # A free and open-source media player
     thunderbird # Thunderbird email client
-    (import ../../../modules/nixos/packages/custom { inherit pkgs; }) # Custom packages
+
+    # Custom packages
+    (import ../../../modules/nixos/packages/custom { inherit pkgs; })
+
+    # Binary dependencies for custom packages
+    wl-clipboard # copy, paste (wayland)
+    xclip # copy, paste (X11)
+    p7zip # xtract
+    unzip # xtract
+    unrar # xtract
   ];
 }
