@@ -1,10 +1,18 @@
 { config, pkgs, ... }:
-
+let
+  username = "diomeh";
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "diomeh";
-  home.homeDirectory = "/home/diomeh";
+  home.username = "${username}";
+  home.homeDirectory = "/home/${username}";
+
+  imports = [
+    ../../modules/home-manager/zsh.nix
+    ../../modules/home-manager/kitty.nix
+    # ../../modules/home-manager/wayland.nix
+  ];
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -14,12 +22,6 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "24.05"; # Please read the comment before changing.
-
-  imports = [
-    ../../modules/home-manager/zsh.nix
-    ../../modules/home-manager/kitty.nix
-    # ../../modules/home-manager/wayland.nix
-  ];
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
@@ -50,7 +52,7 @@
   #
   # or
   #
-  #  /etc/profiles/per-user/demo/etc/profile.d/hm-session-vars.sh
+  #  /etc/profiles/per-user/${username}/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
