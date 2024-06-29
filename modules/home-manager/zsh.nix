@@ -23,29 +23,32 @@
     plugins = [];
 
     shellAliases = {
-      ls = "${pkgs.eza}/bin/eza --git --icons"; # Display icons and git status
-      l = "ls -lahbX"; # Long format, all files, show header, binary size prefix, dereference symlinks
-      ll = "ls -l"; # Long format
-      la = "ls -a"; # All files
+      # FIXME: kitty terminal doesn't render icons
+      ls = "${pkgs.eza}/bin/eza --git"; # Display git status 
+      # ls = "${pkgs.eza}/bin/eza --git --icons"; # Display icons and git status
+
+      l = "ls -lahbX"; # [l]ong format, [a]ll files, s[h]ow header, [b]inary size prefix, dereference symlinks
+      ll = "ls -l"; # [l]ong format
+      la = "ls -a"; # [a]ll files
       lt = "ls --tree"; # Tree format
-      ldir = "l -D"; # Directories only
-      lfil = "l -f"; # Files only
+      ldir = "l -D"; # [D]irectories only
+      lfil = "l -f"; # [f]iles only
     };
 
     # Extra commands that should be added to {file}.zshrc before compinit.
     initExtraBeforeCompInit = ''
-      # Add your custom zsh configuration here
+      # Add your custom before compinit zsh configuration here 
     '';
 
     # Extra commands that should be added to {file}.zshrc.
     initExtra = ''
-      # ctrl + backspace to delete word
+      # ctrl + backspace to delete word to the left of cursor
       bindkey '^H' backward-kill-word
 
-      # ctrl + delete to delete word
+      # ctrl + delete to delete word to the right of cursor
       bindkey '^[[3;5~' kill-word
 
-      # Disable user@system in shell prompt
+      # Disable user@system in shell prompt (needed for om-my-zsh agnoster theme)
       prompt_context(){}
 
       # ??? No idea why this is here
