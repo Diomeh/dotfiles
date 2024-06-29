@@ -48,6 +48,11 @@
     ../../modules/nixos/packages/sys-utils.nix
     ../../modules/nixos/packages/zsh.nix
 
+    # Import custom packages
+    # Infinite recursion ?????????????
+    # Importing in modules/nixos/packages/misc.nix causes no problems
+    # (import ../../modules/nixos/packages/custom { inherit pkgs; }) 
+
     # Gaming related stuff
     ../../modules/nixos/packages/gaming/launchers.nix
     ../../modules/nixos/packages/gaming/steam.nix
