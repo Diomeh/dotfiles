@@ -2,10 +2,10 @@
 
 pkgs.stdenv.mkDerivation {
   pname = "dsu";
-  version = "2.1.24";
+  version = "2.1.30";
   src = pkgs.fetchurl {
-    url = "https://github.com/Diomeh/dsu/releases/download/v2.1.24/dsu-v2.1.24.tar.gz";
-    sha256 = "1ginq9nn930cwm9hkblyps70nr5x9zbkpqh0z7n6drqpmh4hp37w";
+    url = "https://github.com/Diomeh/dsu/releases/download/v2.1.30/dsu-v2.1.30.tar.gz";
+    sha256 = "0lw8gym80bpgdbb6kxrsm85hr374h03k5jmfijy34r5b0cp3hrm7";
   };
 
   installPhase = ''

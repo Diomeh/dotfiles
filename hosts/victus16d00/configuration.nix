@@ -43,6 +43,7 @@
     ../../modules/nixos/packages/nix-helper.nix
     ../../modules/nixos/packages/nix-ld.nix
     ../../modules/nixos/packages/office.nix
+    ../../modules/nixos/packages/openssl.nix
     ../../modules/nixos/packages/package-managers.nix
     ../../modules/nixos/packages/samba.nix
     ../../modules/nixos/packages/sys-utils.nix
