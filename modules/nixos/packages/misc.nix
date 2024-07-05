@@ -6,10 +6,9 @@
     vlc # A free and open-source media player
     thunderbird # Thunderbird email client
 
-    # Custom packages
-    (import ../../../modules/nixos/packages/custom { inherit pkgs; })
+    (import ../../../modules/nixos/packages/dsu { inherit pkgs; })
 
-    # Binary dependencies for custom packages
+    # Binary dependencies for dsu
     wl-clipboard # copy, paste (wayland)
     xclip # copy, paste (X11)
     p7zip # xtract
