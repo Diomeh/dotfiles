@@ -14,5 +14,7 @@
     sublime4 # Sublime Text
     zed-editor # Zed text editor
     obsidian # Obsidian note-taking app
+    shfmt # Shell script formatter
+    shellcheck # Shell script linter
   ];
 }
