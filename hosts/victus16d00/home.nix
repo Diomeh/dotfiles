@@ -54,7 +54,10 @@ in
   #  /etc/profiles/per-user/${username}/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    # Needed for rust to find openssl
+    # Should be set in modules/packages/openssl.nix
+    # but is not being read by neither jetbrains nor vscode
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
   };
 
   # Let Home Manager install and manage itself.
