@@ -53,6 +53,9 @@
 
       # ??? No idea why this is here
       export XDG_DATA_HOME="$HOME/.local/share"
+
+      # JetBrains IDEs
+      PATH="$PATH:$HOME/.local/share/JetBrains/Toolbox/scripts"
     '';
 
     oh-my-zsh = {
