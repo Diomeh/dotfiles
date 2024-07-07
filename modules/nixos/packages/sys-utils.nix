@@ -16,5 +16,6 @@
     xdg-utils # Workaround for xdg-open, see: https://github.com/NixOS/nixpkgs/issues/145354
     silver-searcher # A code searching tool similar to ack, with a focus on speed
     translate-shell # Command-line translator using Google Translate, Bing Translator, Yandex.Translate, and Apertium
+    fzf
   ];
 }
