@@ -16,5 +16,6 @@
     obsidian # Obsidian note-taking app
     shfmt # Shell script formatter
     shellcheck # Shell script linter
+    blender # 3D creation suite
   ];
 }
