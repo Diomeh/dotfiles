@@ -51,7 +51,8 @@
       # Disable user@system in shell prompt (needed for om-my-zsh agnoster theme)
       prompt_context(){}
 
-      # ??? No idea why this is here
+      # Automatically launch Steam in offload mode
+      # See: https://nixos.wiki/wiki/Nvidia#Using_Steam_in_Offload_Mode
       export XDG_DATA_HOME="$HOME/.local/share"
 
       # JetBrains IDEs
