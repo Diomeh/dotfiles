@@ -86,7 +86,6 @@
         "man"
         "rust"
         "sudo"
-        "tldr"
       ];
       extraConfig = ''
         # Add your custom oh-my-zsh configuration here
