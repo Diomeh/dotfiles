@@ -9,6 +9,7 @@ in
   home.homeDirectory = "/home/${username}";
 
   imports = [
+    ../../modules/home-manager/git.nix
     ../../modules/home-manager/zsh.nix
     ../../modules/home-manager/kitty.nix
   ];
