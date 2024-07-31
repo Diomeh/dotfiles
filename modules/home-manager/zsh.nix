@@ -76,6 +76,17 @@
         "docker"
         "web-search"
         "direnv"
+        "fzf"
+        "colored-man-pages"
+        "colorize"
+        "composer"
+        "docker-compose"
+        "docker"
+        "history"
+        "man"
+        "rust"
+        "sudo"
+        "tldr"
       ];
       extraConfig = ''
         # Add your custom oh-my-zsh configuration here
