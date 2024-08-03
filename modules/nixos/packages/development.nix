@@ -15,6 +15,7 @@
     obsidian # Obsidian note-taking app
     shfmt # Shell script formatter
     shellcheck # Shell script linter
+    shunit2 # Shell script unit testing framework
     blender # 3D creation suite
     jetbrains.webstorm # Web development IDE
     jetbrains.rust-rover # Rust IDE
