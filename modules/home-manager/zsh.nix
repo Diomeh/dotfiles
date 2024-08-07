@@ -63,6 +63,9 @@
       # Force export PKG_CONFIG_PATH so that rust IDEs can find openssl
       # Theoretically this should work with environment.sessionVariables but it doesn't
       export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig"
+
+      # Add ~/.local/bin to PATH
+      PATH="$PATH:$HOME/.local/bin"
     '';
 
     oh-my-zsh = {
