@@ -17,6 +17,18 @@ in
     wineWowPackages.stable # wine 64-bit
     winetricks
     protonup # Proton GE
-    protontricks # Wrapper for running Winetricks commands for Proton-enabled games
+
+    # For ModOrganizer 2
+
+    # TODO: enable once issue 304 is fixed
+    # See: https://github.com/Matoking/protontricks/issues/304
+    # protontricks # Wrapper for running Winetricks commands for Proton-enabled games
+
+    # For now, install beta through pipx
+    # See: https://github.com/Matoking/protontricks/issues/304#issuecomment-2220599470
+    python312Packages.pip # The PyPA recommended tool for installing Python packages
+    python312Packages.pipx # Install and run Python applications in isolated environments
+    # INFO: DO NOT FORGET TO UNINSTALL protontricks with pipx before removing it
+    # $ pipx uninstall protontricks
   ];
 }
