@@ -17,6 +17,7 @@
     shellcheck # Shell script linter
     shunit2 # Shell script unit testing framework
     blender # 3D creation suite
+    gnome.zenity # Tool to display dialogs from the commandline and shell scripts
     jetbrains.webstorm # Web development IDE
     jetbrains.rust-rover # Rust IDE
     jetbrains.pycharm-professional # Python IDE
