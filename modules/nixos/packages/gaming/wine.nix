@@ -17,5 +17,6 @@ in
     wineWowPackages.stable # wine 64-bit
     winetricks
     protonup # Proton GE
+    protontricks # Wrapper for running Winetricks commands for Proton-enabled games
   ];
 }
