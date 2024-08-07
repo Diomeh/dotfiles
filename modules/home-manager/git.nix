@@ -10,6 +10,8 @@
     includes = [ { path = "~/.gitconfig.local"; } ];
 
     extraConfig = {
+      push.autoSetupRemote = true;
+
       pager = {
         branch = false;
       };
