@@ -22,5 +22,6 @@
     jetbrains.rust-rover # Rust IDE
     jetbrains.pycharm-professional # Python IDE
     jetbrains.phpstorm # PHP IDE
+    starship # Cross-shell prompt
   ];
 }

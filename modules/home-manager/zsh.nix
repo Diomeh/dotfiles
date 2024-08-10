@@ -51,7 +51,7 @@
       bindkey '^[[3;5~' kill-word
 
       # Disable user@system in shell prompt (needed for om-my-zsh agnoster theme)
-      prompt_context(){}
+      # prompt_context(){}
 
       # Automatically launch Steam in offload mode
       # See: https://nixos.wiki/wiki/Nvidia#Using_Steam_in_Offload_Mode
@@ -66,11 +66,14 @@
 
       # Add ~/.local/bin to PATH
       PATH="$PATH:$HOME/.local/bin"
+
+      # Enable starship prompt
+      eval "$(starship init zsh)"
     '';
 
     oh-my-zsh = {
       enable = true;
-      theme = "agnoster";
+      theme = "";
       plugins = [
         "git"
         "npm"
