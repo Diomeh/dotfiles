@@ -215,7 +215,10 @@ in
 
         nix_shell = {
           style = "bg:color_blue";
-          format = ''[[ $symbol$state( $name) ](fg:#83a598 bg:color_bg3)]($style)'';
+          format = ''[[ $symbol$state ](fg:#83a598 bg:color_bg3)]($style)'';
+          symbol = " ";
+          impure_msg = " ";
+          pure_msg = "";
         };
 
         time = {
