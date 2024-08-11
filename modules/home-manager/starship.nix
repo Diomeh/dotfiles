@@ -1,10 +1,22 @@
 { pkgs, ... }:
 let
+  # Starship is a shell agnostic prompt
+  # See: https://starship.rs/
+  # For more information on configuring starship, see: https://starship.rs/config/
+  # For a reference on icons, see: https://www.nerdfonts.com/cheat-sheet/
+
+  # This configuration is based off Gruvbox Rainbow preset, see: https://starship.rs/presets/gruvbox-rainbow/
+  # Because of the way the prompt is set up, all icons used for all modules should be monochrome
+  # This facilitates foreground and background color changes; refer to nerdfonts cheat sheet for monochrome icons
+
+  # NOTE: it is advised to pair every icon with a blank space, otherwise the prompt will look cluttered
+  # e.g. " " instead of ""
+
   lang_symbols = {
-    "rust" = "";
-    "nodejs" = "";
-    "php" = "";
-    "python" = "";
+    "rust" = " ";
+    "nodejs" = " ";
+    "php" = " ";
+    "python" = " ";
   };
 
   lang_style = "bg:color_blue";

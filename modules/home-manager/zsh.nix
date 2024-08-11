@@ -23,9 +23,7 @@
     plugins = [];
 
     shellAliases = {
-      # FIXME: kitty terminal doesn't render icons
-      ls = "${pkgs.eza}/bin/eza --git"; # Display git status 
-      # ls = "${pkgs.eza}/bin/eza --git --icons"; # Display icons and git status
+      ls = "${pkgs.eza}/bin/eza --git --icons"; # Display icons and git status
 
       l = "ls -lahbX"; # [l]ong format, [a]ll files, s[h]ow header, [b]inary size prefix, dereference symlinks
       ll = "ls -l"; # [l]ong format
