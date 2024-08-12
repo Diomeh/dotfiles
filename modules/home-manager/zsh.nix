@@ -33,6 +33,8 @@
       lfil = "l -f"; # [f]iles only
       lf = "l | fzf"; # [f]uzzy search
       lg = "l | grep --recursive --ignore-case"; # list and find [r]ecursively and case [i]nsensitive 
+
+      protontricks="flatpak run com.github.Matoking.protontricks";
     };
 
     # Extra commands that should be added to {file}.zshrc before compinit.
