@@ -3,7 +3,7 @@ let
   # Starship is a shell agnostic prompt
   # See: https://starship.rs/
   # For more information on configuring starship, see: https://starship.rs/config/
-  # For a reference on icons, see: https://www.nerdfonts.com/cheat-sheet/
+  # For a reference on icons, see: https://www.nerdfonts.com/cheat-sheet
 
   # This configuration is based off Gruvbox Rainbow preset, see: https://starship.rs/presets/gruvbox-rainbow/
   # Because of the way the prompt is set up, all icons used for all modules should be monochrome
@@ -185,12 +185,12 @@ in
           behind = " ";
           diverged = " ";
           up_to_date = "";
-          untracked = " ";
+          untracked = " ";
           stashed = "󰆼 ";
           modified = "󰦒 ";
           staged = " ";
           renamed = " ";
-          deleted = "✘ ";
+          deleted = " ";
           typechanged = "";
         };
 
