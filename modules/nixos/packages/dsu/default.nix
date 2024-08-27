@@ -4,8 +4,8 @@ pkgs.stdenv.mkDerivation {
   pname = "dsu";
   version = "2.1.30";
   src = pkgs.fetchurl {
-    url = "https://github.com/Diomeh/dsu/releases/download/v2.2.9/dsu-v2.2.9.tar.gz";
-    sha256 = "08b242lvmn2lclb6nacifivhlwamybzq88mccik5ygrxh24zx3wr";
+    url = "https://github.com/Diomeh/dsu/releases/download/2.2.10/dsu-2.2.10.tar.gz";
+    sha256 = "0l6xw6lpvsx6f4xjiz0g55r7zgwjwk110rg0x0d3kqx9jx47rfz7";
   };
 
   installPhase = ''
