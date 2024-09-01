@@ -35,6 +35,13 @@
       lg = "l | grep --recursive --ignore-case"; # list and find [r]ecursively and case [i]nsensitive 
 
       protontricks="flatpak run com.github.Matoking.protontricks";
+
+      # HACK: allow for dsu's paste to take priority over the system's paste
+      # Ideally, we should be able to solve this at the dsu derivation level
+      # but that's a rabbit hole I don't want to go down right now
+      # See: https://discourse.nixos.org/t/are-there-rules-to-order-of-entries-in-path/9471/3
+      # See: https://github.com/Diomeh/dsu
+      paste = "/run/current-system/sw/bin/paste";
     };
 
     # Extra commands that should be added to {file}.zshrc before compinit.
