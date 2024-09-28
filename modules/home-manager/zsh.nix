@@ -23,9 +23,7 @@
     plugins = [];
 
     shellAliases = {
-      # FIXME: kitty terminal doesn't render icons
-      ls = "${pkgs.eza}/bin/eza --git"; # Display git status 
-      # ls = "${pkgs.eza}/bin/eza --git --icons"; # Display icons and git status
+      ls = "${pkgs.eza}/bin/eza --git --icons"; # Display icons and git status
 
       l = "ls -lahbX"; # [l]ong format, [a]ll files, s[h]ow header, [b]inary size prefix, dereference symlinks
       ll = "ls -l"; # [l]ong format
@@ -35,6 +33,15 @@
       lfil = "l -f"; # [f]iles only
       lf = "l | fzf"; # [f]uzzy search
       lg = "l | grep --recursive --ignore-case"; # list and find [r]ecursively and case [i]nsensitive 
+
+      protontricks="flatpak run com.github.Matoking.protontricks";
+
+      # HACK: allow for dsu's paste to take priority over the system's paste
+      # Ideally, we should be able to solve this at the dsu derivation level
+      # but that's a rabbit hole I don't want to go down right now
+      # See: https://discourse.nixos.org/t/are-there-rules-to-order-of-entries-in-path/9471/3
+      # See: https://github.com/Diomeh/dsu
+      paste = "/run/current-system/sw/bin/paste";
     };
 
     # Extra commands that should be added to {file}.zshrc before compinit.
@@ -51,7 +58,7 @@
       bindkey '^[[3;5~' kill-word
 
       # Disable user@system in shell prompt (needed for om-my-zsh agnoster theme)
-      prompt_context(){}
+      # prompt_context(){}
 
       # Automatically launch Steam in offload mode
       # See: https://nixos.wiki/wiki/Nvidia#Using_Steam_in_Offload_Mode
@@ -63,11 +70,17 @@
       # Force export PKG_CONFIG_PATH so that rust IDEs can find openssl
       # Theoretically this should work with environment.sessionVariables but it doesn't
       export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig"
+
+      # Add ~/.local/bin to PATH
+      PATH="$PATH:$HOME/.local/bin"
+
+      # Enable starship prompt
+      eval "$(starship init zsh)"
     '';
 
     oh-my-zsh = {
       enable = true;
-      theme = "agnoster";
+      theme = "";
       plugins = [
         "git"
         "npm"
