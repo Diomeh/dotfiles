@@ -16,9 +16,8 @@
 
     shellIntegration.enableZshIntegration = true;
     font = {
-      name = "Fira Code";
+      name = "GeistMono Nerd Font";
       size = 11;
-      package = pkgs.fira-code;
     };
     settings = {
       disable_ligatures = "always";
