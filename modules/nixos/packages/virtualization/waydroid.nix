@@ -16,5 +16,14 @@
   environment.systemPackages = with pkgs; [ wl-clipboard ];
 
   # Force disable waydroid service so that it is not started at boot
-  systemd.services.waydroid-container.wantedBy = lib.mkForce [];
+  systemd.services.waydroid-container.wantedBy = lib.mkForce [ ];
+
+  # Mount a shared folder from the host to the waydroid container under /Shared
+  fileSystems."/home/diomeh/.local/share/waydroid/data/media/0/Shared" = {
+    device = "/home/diomeh/Waydroid";
+    options = [ "bind" ];
+  };
+
+  # Set proper permissions for the shared folder
+  systemd.tmpfiles.rules = [ "d /home/diomeh/Waydroid 0755 diomeh users -" ];
 }

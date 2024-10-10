@@ -9,8 +9,11 @@ in
   home.homeDirectory = "/home/${username}";
 
   imports = [
+    ../../modules/home-manager/fonts.nix
+    ../../modules/home-manager/git.nix
     ../../modules/home-manager/zsh.nix
     ../../modules/home-manager/kitty.nix
+    ../../modules/home-manager/starship.nix
   ];
 
   # This value determines the Home Manager release that your configuration is
@@ -54,7 +57,10 @@ in
   #  /etc/profiles/per-user/${username}/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    # Needed for rust to find openssl
+    # Should be set in modules/packages/openssl.nix
+    # but is not being read by neither jetbrains nor vscode
+    PKG_CONFIG_PATH = "${pkgs.openssl.dev}/lib/pkgconfig";
   };
 
   # Let Home Manager install and manage itself.
