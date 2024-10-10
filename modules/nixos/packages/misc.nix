@@ -8,7 +8,7 @@
 
     (import ../../../modules/nixos/packages/dsu { inherit pkgs; })
 
-    # Binary dependencies for dsu
+    # Runtime dependencies for dsu
     wl-clipboard # copy, paste (wayland)
     xclip # copy, paste (X11)
     p7zip # xtract
