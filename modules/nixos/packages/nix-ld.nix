@@ -9,6 +9,8 @@
       ++ (with pkgs; [
         # Add missing dynamic libraries for unpackaged
         # programs here, NOT in environment.systemPackages
-      ]);
+      ])
+      # Add steam-run DLL's
+      ++ (pkgs.steam-run.fhsenv.args.multiPkgs pkgs);
   };
 }
