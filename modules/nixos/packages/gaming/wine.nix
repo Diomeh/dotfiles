@@ -1,11 +1,8 @@
-{ pkgs, ... }:
-let
-  username = "diomeh";
-in
+{ pkgs, config, ... }:
 {
   environment.sessionVariables = {
     # For proton GE
-    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/${username}/.steam/root/compatibilitytools.d";
+    STEAM_EXTRA_COMPAT_TOOLS_PATHS = "/home/${config.users.default.username}/.steam/root/compatibilitytools.d";
   };
 
   environment.variables = {

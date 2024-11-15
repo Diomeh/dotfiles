@@ -1,7 +1,4 @@
-{ ... }:
-let
-  username = "diomeh";
-in
+{ config, ... }:
 {
   # Enable VirtualBox
   virtualisation.virtualbox = {
@@ -20,6 +17,5 @@ in
   };
 
   # Add the current user to the vboxusers group
-  # TODO: move user to a separate file
-  users.extraGroups.vboxusers.members = [ "${username}" ];
+  users.extraGroups.vboxusers.members = [ "${config.users.default.username}" ];
 }

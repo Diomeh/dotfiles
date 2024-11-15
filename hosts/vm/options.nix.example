@@ -1,0 +1,31 @@
+{ pkgs, ... }:
+{
+  # This is a global configuration shared by modules
+  options = {
+    users = {
+      default = {
+        isNormalUser = true; # Is this a human user?
+        username = "user";
+        description = "user";
+        groups = [
+          "wheel"
+          "networkmanager"
+        ];
+        shell = pkgs.zsh;
+        home = "/home/user";
+        pkgs = with pkgs; [ ];
+      };
+    };
+
+    rclone = {
+      enable = false;
+      gdrive = {
+        enable = false;
+        mount = "/rmt/gdrive";
+        client_id = "";
+        client_secret = "";
+        token = "";
+      };
+    };
+  };
+}

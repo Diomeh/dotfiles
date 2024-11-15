@@ -1,0 +1,64 @@
+{ config, lib, pkgs, ... }:
+
+with lib;
+
+let
+  # Helper function to define user configuration
+  mkUserOption = {
+    isNormalUser = true; # Is this a human user?
+    username = "user";
+    description = "user";
+    groups = ["wheel" "networkmanager"];
+    shell = pkgs.zsh;
+    home = "/home/user";
+    pkgs = with pkgs; [ ];
+  };
+in {
+  options = {
+    users.default = mkOption {
+      type = types.attrs;
+      default = mkUserOption;
+      description = "Default user configuration.";
+    };
+
+    rclone = {
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Enable rclone service.";
+      };
+
+      gdrive = {
+        enable = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Enable Google Drive integration.";
+        };
+
+        mount = mkOption {
+          type = types.str;
+          default = "/rmt/gdrive";
+          description = "Mount point for Google Drive.";
+        };
+
+        client_id = mkOption {
+          type = types.str;
+          default = "";
+          description = "Google Drive client ID.";
+        };
+
+        client_secret = mkOption {
+          type = types.str;
+          default = "";
+          description = "Google Drive client secret.";
+        };
+
+        token = mkOption {
+          type = types.str;
+          default = "";
+          description = "Google Drive access token.";
+        };
+      };
+    };
+  };
+}

@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, lib, config, ... }:
 {
   # WayDroid requires a Wayland desktop session and cannot be used on X11 directly, but can be run in a nested Wayland session, using e.g. cage.
   # See https://www.hjdskes.nl/projects/cage
@@ -19,11 +19,11 @@
   systemd.services.waydroid-container.wantedBy = lib.mkForce [ ];
 
   # Mount a shared folder from the host to the waydroid container under /Shared
-  fileSystems."/home/diomeh/.local/share/waydroid/data/media/0/Shared" = {
-    device = "/home/diomeh/Waydroid";
+  fileSystems."${config.users.default.home}/.local/share/waydroid/data/media/0/Shared" = {
+    device = "${config.users.default.home}/Waydroid";
     options = [ "bind" ];
   };
 
   # Set proper permissions for the shared folder
-  systemd.tmpfiles.rules = [ "d /home/diomeh/Waydroid 0755 diomeh users -" ];
+  systemd.tmpfiles.rules = [ "d ${config.users.default.home}/Waydroid 0755 ${config.users.default.username} users -" ];
 }

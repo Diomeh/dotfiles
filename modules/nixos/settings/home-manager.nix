@@ -1,7 +1,5 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, config, ... }:
 let
-  # TODO: read user from a separate file
-  username = "diomeh";
   hostname = "victus16d00";
 in
 {
@@ -18,7 +16,7 @@ in
     backupFileExtension = "backup"; 
 
     users = {
-      "${username}" = import ../../../hosts/${hostname}/home.nix;
+      "${config.users.default.username}" = import ../../../hosts/${hostname}/home.nix;
     };
   };
 }

@@ -1,14 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 let
-  username = "diomeh";
+  user = config.users.default;
 in
 {
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users."${username}" = {
-    isNormalUser = true;
-    description = "${username}";
-    extraGroups = [ "wheel" ];
-    shell = pkgs.zsh;
-    packages = with pkgs; [ ];
+  users.users."${user.username}" = {
+    isNormalUser = user.isNormalUser;
+    description = "${user.description}";
+    extraGroups = user.groups;
+    shell = user.shell;
+    packages = user.pkgs;
   };
 }

@@ -1,7 +1,4 @@
-{ pkgs, ... }:
-let
-  username = "diomeh";
-in
+{ pkgs, config, ... }:
 {
   # Enables wireless support via wpa_supplicant.
   # networking.wireless.enable = true;  
@@ -17,6 +14,5 @@ in
   networking.networkmanager.enable = true;
 
   # Add the current user to the docker group
-  # TODO: move user to a separate file
-  users.users."${username}".extraGroups = [ "networkmanager" ];
+  users.users."${config.users.default.username}".extraGroups = [ "networkmanager" ];
 }

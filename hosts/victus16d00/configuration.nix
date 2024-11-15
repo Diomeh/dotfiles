@@ -6,7 +6,11 @@
 
 {
   imports = [
+    # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    # Import the user-defined options.
+    ./options.nix
 
     # Import drivers
     ../../modules/nixos/drivers/opengl.nix
