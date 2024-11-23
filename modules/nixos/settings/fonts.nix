@@ -8,6 +8,8 @@
 
   # Nerd Fonts
   fonts.packages = with pkgs; [
+    corefonts
+    vistafonts
     (nerdfonts.override {
       fonts = [
         "NerdFontsSymbolsOnly"
