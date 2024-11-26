@@ -28,6 +28,12 @@ in {
         description = "Enable rclone service.";
       };
 
+      conf = mkOption {
+        type = types.path;
+        default = "${config.users.default.home}/.config/rclone/rclone.conf";
+        description = "Path to rclone configuration file.";
+      };
+
       gdrive = {
         enable = mkOption {
           type = types.bool;
@@ -36,27 +42,23 @@ in {
         };
 
         mount = mkOption {
-          type = types.str;
+          type = types.path;
           default = "/rmt/gdrive";
           description = "Mount point for Google Drive.";
         };
+      };
 
-        client_id = mkOption {
-          type = types.str;
-          default = "";
-          description = "Google Drive client ID.";
+      mega = {
+        enable = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Enable Mega integration.";
         };
 
-        client_secret = mkOption {
-          type = types.str;
-          default = "";
-          description = "Google Drive client secret.";
-        };
-
-        token = mkOption {
-          type = types.str;
-          default = "";
-          description = "Google Drive access token.";
+        mount = mkOption {
+          type = types.path;
+          default = "/rmt/mega";
+          description = "Mount point for Mega.";
         };
       };
     };

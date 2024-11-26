@@ -1,30 +1,65 @@
-{ pkgs, ... }:
-{
-  # This is a global configuration shared by modules
+{ config, lib, pkgs, ... }:
+
+with lib;
+
+let
+  # Helper function to define user configuration
+  mkUserOption = {
+    isNormalUser = true; # Is this a human user?
+    username = "user";
+    description = "user";
+    groups = ["wheel" "networkmanager"];
+    shell = pkgs.zsh;
+    home = "/home/user";
+    pkgs = with pkgs; [ ];
+  };
+in {
   options = {
-    users = {
-      default = {
-        isNormalUser = true; # Is this a human user?
-        username = "user";
-        description = "user";
-        groups = [
-          "wheel"
-          "networkmanager"
-        ];
-        shell = pkgs.zsh;
-        home = "/home/user";
-        pkgs = with pkgs; [ ];
-      };
+    users.default = mkOption {
+      type = types.attrs;
+      default = mkUserOption;
+      description = "Default user configuration.";
     };
 
     rclone = {
-      enable = false;
+      enable = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Enable rclone service.";
+      };
+
+      conf = mkOption {
+        type = types.path;
+        default = "${config.users.default.home}/.config/rclone/rclone.conf";
+        description = "Path to rclone configuration file.";
+      };
+
       gdrive = {
-        enable = false;
-        mount = "/rmt/gdrive";
-        client_id = "";
-        client_secret = "";
-        token = "";
+        enable = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Enable Google Drive integration.";
+        };
+
+        mount = mkOption {
+          type = types.path;
+          default = "/rmt/gdrive";
+          description = "Mount point for Google Drive.";
+        };
+      };
+
+      mega = {
+        enable = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Enable Mega integration.";
+        };
+
+        mount = mkOption {
+          type = types.path;
+          default = "/rmt/mega";
+          description = "Mount point for Mega.";
+        };
       };
     };
   };

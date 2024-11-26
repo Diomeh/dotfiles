@@ -49,6 +49,7 @@
     ../../modules/nixos/packages/office.nix
     ../../modules/nixos/packages/openssl.nix
     ../../modules/nixos/packages/package-managers.nix
+    ../../modules/nixos/packages/rclone.nix
     ../../modules/nixos/packages/samba.nix
     ../../modules/nixos/packages/sys-utils.nix
     ../../modules/nixos/packages/zsh.nix
