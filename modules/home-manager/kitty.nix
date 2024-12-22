@@ -12,7 +12,7 @@
 
     # https://github.com/kovidgoyal/kitty-themes
     # https://sw.kovidgoyal.net/kitty/kittens/themes/
-    theme = "VSCode_Dark";
+    themeFile = "VSCode_Dark";
 
     shellIntegration.enableZshIntegration = true;
     font = {

@@ -1,6 +1,6 @@
 { inputs, pkgs, config, ... }:
 let
-  hostname = "victus16d00";
+  hostname = "nixos";
 in
 {
   environment.systemPackages = with pkgs; [

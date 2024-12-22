@@ -1,7 +1,7 @@
 { ... }:
 {
   # Enable sound with pipewire.
-  sound.enable = true;
+  # sound.enable = true;
 
   # Disable pulseaudio and enable rtkit for pipewire.
   hardware.pulseaudio.enable = false;

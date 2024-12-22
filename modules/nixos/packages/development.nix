@@ -15,7 +15,7 @@ in
     dbeaver-bin # SQL GUI
     kate # Kate text editor
     sublime4 # Sublime Text
-    gnome.zenity # Tool to display dialogs from the commandline and shell scripts
+    zenity # Tool to display dialogs from the commandline and shell scripts
     unstable.jetbrains.webstorm # Web development IDE
     unstable.jetbrains.rust-rover # Rust IDE
     unstable.jetbrains.pycharm-professional # Python IDE

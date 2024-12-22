@@ -37,7 +37,7 @@ sudo nix-channel --update
 
 Edit the following files to set your username:
 - [./modules/users/default.nix](./modules/users/default.nix)
-- [./hosts/victus16d00/home.nix](./hosts/victus16d00/configuration.nix)
+- [./hosts/nixos/home.nix](./hosts/nixos/configuration.nix)
 - [./modules/settings/home-manager.nix](./modules/settings/home-manager.nix): also set your hostname, should be the same as `networking.hostName` in `configuration.nix`.
 - [./modules/settings/nix-helper.nix](./modules/settings/nix-helper.nix)
 - [./modules/settings/network.nix](./modules/settings/network.nix)
@@ -57,7 +57,7 @@ in
 }
 ``` 
 
-Apply the configuration (replace `[HOSTNAME]` with the hostname of the system, `victus16d00` by default):
+Apply the configuration (replace `[HOSTNAME]` with the hostname of the system, `nixos` by default):
 
 ```bash
 sudo nixos-rebuild switch --flake .#[HOSTNAME]

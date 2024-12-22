@@ -5,7 +5,7 @@
     enable = true;
 
     # Set the DPI to 91. This is device-dependent and may need to be adjusted.
-    dpi = 91;
+    # dpi = 91;
 
     # Configure keymap in X11
     xkb = {
@@ -16,4 +16,7 @@
     # Enable touchpad support (enabled default in most desktopManager).
     # libinput.enable = true;
   };
+
+  # Configure console keymap
+  console.keyMap = "us-acentos";
 }

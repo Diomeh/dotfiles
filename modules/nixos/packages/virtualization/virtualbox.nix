@@ -9,7 +9,7 @@
       enable = true;
 
       # Enable the clipboard and drag-and-drop features
-      draganddrop = true;
+      dragAndDrop = true;
 
       # Enable the shared clipboard feature
       clipboard = true;

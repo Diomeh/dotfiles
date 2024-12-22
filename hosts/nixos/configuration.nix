@@ -14,7 +14,8 @@
 
     # Import drivers
     ../../modules/nixos/drivers/opengl.nix
-    ../../modules/nixos/drivers/nvidia.nix
+    # FIXME: when nvidia drivers are installed, SDDM cannot perform login and gets stuck after inputting password
+    # ../../modules/nixos/drivers/nvidia.nix
     ../../modules/nixos/drivers/power-management.nix
 
     # Import users
@@ -28,6 +29,7 @@
     ../../modules/nixos/settings/fstrim.nix
     ../../modules/nixos/settings/home-manager.nix
     ../../modules/nixos/settings/locales.nix
+    ../../modules/nixos/settings/mounts.nix
     ../../modules/nixos/settings/network.nix
     ../../modules/nixos/settings/numlock.nix
     ../../modules/nixos/settings/sound.nix
@@ -45,15 +47,18 @@
     ../../modules/nixos/packages/misc.nix
     ../../modules/nixos/packages/mullvad.nix
     ../../modules/nixos/packages/nix-helper.nix
-    ../../modules/nixos/packages/nix-ld.nix
+    # FIXME: error: expected a set but found a list: [ "-e" «thunk» ]
+    # ../../modules/nixos/packages/nix-ld.nix
     ../../modules/nixos/packages/office.nix
     ../../modules/nixos/packages/openssl.nix
     ../../modules/nixos/packages/package-managers.nix
-    ../../modules/nixos/packages/rclone.nix
-    ../../modules/nixos/packages/samba.nix
+    # ../../modules/nixos/packages/rclone.nix
+    # FIXME: The option definition `services.samba.extraConfig' no longer has any effect; please remove it. Use services.samba.settings instead.
+    # ../../modules/nixos/packages/samba.nix
     ../../modules/nixos/packages/sys-utils.nix
     ../../modules/nixos/packages/zsh.nix
-    ../../modules/nixos/packages/xdm.nix
+    # FIXME: error: 'gnome3' has been renamed to/replaced by 'gnome'
+    # ../../modules/nixos/packages/xdm.nix
 
     # Import custom packages
     # Infinite recursion ?????????????
@@ -61,18 +66,18 @@
     # (import ../../modules/nixos/packages/custom { inherit pkgs; }) 
 
     # Gaming related stuff
-    ../../modules/nixos/packages/gaming/launchers.nix
-    ../../modules/nixos/packages/gaming/steam.nix
-    ../../modules/nixos/packages/gaming/wine.nix
+    # ../../modules/nixos/packages/gaming/launchers.nix
+    # ../../modules/nixos/packages/gaming/steam.nix
+    # ../../modules/nixos/packages/gaming/wine.nix
 
     # Virtualization
-    ../../modules/nixos/packages/virtualization/docker.nix
-    ../../modules/nixos/packages/virtualization/libvirt.nix
-    ../../modules/nixos/packages/virtualization/virtualbox.nix
-    ../../modules/nixos/packages/virtualization/waydroid.nix
+    # ../../modules/nixos/packages/virtualization/docker.nix
+    # ../../modules/nixos/packages/virtualization/libvirt.nix
+    # ../../modules/nixos/packages/virtualization/virtualbox.nix
+    # ../../modules/nixos/packages/virtualization/waydroid.nix
 
     # Import specialisations
-    ../../modules/nixos/specialisations/on-the-go.nix
+    # ../../modules/nixos/specialisations/on-the-go.nix
   ];
 
   # Bootloader.
@@ -82,8 +87,11 @@
   # Enable nix commands and flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
   # Define your hostname.
-  networking.hostName = "victus16d00";
+  networking.hostName = "nixos";
 
   # Needed for home-manager ZSH completion
   environment.pathsToLink = [ "/share/zsh" ];
@@ -105,5 +113,5 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "24.11"; # Did you read the comment?
 }

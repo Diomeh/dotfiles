@@ -2,10 +2,10 @@
   description = "Nixos config flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/release-24.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -13,10 +13,10 @@
   outputs = { self, nixpkgs, ... }@inputs: {
     # Match configuration name to system hostname for automatic selection
     nixosConfigurations = {
-      victus16d00 = nixpkgs.lib.nixosSystem {
+      nixos = nixpkgs.lib.nixosSystem {
         specialArgs = {inherit inputs;};
         modules = [
-          ./hosts/victus16d00/configuration.nix
+          ./hosts/nixos/configuration.nix
           inputs.home-manager.nixosModules.default
         ];
       };
@@ -30,9 +30,9 @@
     };
 
     homeConfigurations = {
-      victus16d00 = inputs.home-manager.lib.homeManagerConfiguration {
+      nixos = inputs.home-manager.lib.homeManagerConfiguration {
         inherit inputs;
-        configuration = ./hosts/victus16d00/home.nix;
+        configuration = ./hosts/nixos/home.nix;
       };
       vm = inputs.home-manager.lib.homeManagerConfiguration {
         inherit inputs;
