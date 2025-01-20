@@ -8,6 +8,7 @@
     kdePackages.kio-gdrive # KIO Slave to access Google Drive
     kdePackages.kaccounts-providers # KDE accounts providers
     kdePackages.kaccounts-integration # KDE accounts integration
+    ente-auth # 2fa token manager
 
     (import ../../../modules/nixos/packages/dsu { inherit pkgs; })
 
