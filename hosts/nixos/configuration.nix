@@ -84,6 +84,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  # Enable NTFS filesystem support
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # Enable nix commands and flakes
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
