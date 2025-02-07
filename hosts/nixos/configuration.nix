@@ -71,7 +71,7 @@
     # ../../modules/nixos/packages/gaming/wine.nix
 
     # Virtualization
-    # ../../modules/nixos/packages/virtualization/docker.nix
+    ../../modules/nixos/packages/virtualization/docker.nix
     # ../../modules/nixos/packages/virtualization/libvirt.nix
     # ../../modules/nixos/packages/virtualization/virtualbox.nix
     # ../../modules/nixos/packages/virtualization/waydroid.nix
