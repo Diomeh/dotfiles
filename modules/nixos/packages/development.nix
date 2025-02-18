@@ -23,5 +23,6 @@ in
     starship # Cross-shell prompt
     nurl # Nixos URL fetcher generator
     nix-init # Nixos package generator
+    slack # Desktop client for Slack
   ];
 }
