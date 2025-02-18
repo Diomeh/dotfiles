@@ -8,15 +8,15 @@
   # INFO: Beware that the docker group membership is effectively equivalent to being root!
   # See: https://github.com/moby/moby/issues/9976
   # Consider enabling docker in rootless mode
-  # virtualisation.docker.enable = true;
+  virtualisation.docker.enable = true;
 
   # Enable docker daemon in rootless mode
-  virtualisation.docker.rootless = {
-    enable = true;
+#   virtualisation.docker.rootless = {
+#     enable = true;
 
-    # The setSocketVariable option sets the DOCKER_HOST variable to the rootless Docker instance for normal users by default.
-    setSocketVariable = true;
-};
+#     # The setSocketVariable option sets the DOCKER_HOST variable to the rootless Docker instance for normal users by default.
+#     setSocketVariable = true;
+# };
 
   # Add the current user to the docker group
   users.users."${config.users.default.username}".extraGroups = [ "docker" ];
