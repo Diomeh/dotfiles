@@ -10,6 +10,7 @@
     kdePackages.kaccounts-integration # KDE accounts integration
     ente-auth # 2fa token manager
     protonvpn-gui # Proton VPN GTK app for Linux
+    tree # Command to produce a depth indented directory listing
 
     (import ../../../modules/nixos/packages/dsu { inherit pkgs; })
 
