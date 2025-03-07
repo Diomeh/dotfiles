@@ -7,6 +7,7 @@
   i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
+    LC_ALL = "en_GB.UTF-8";
     LC_ADDRESS = "es_CO.UTF-8";
     LC_IDENTIFICATION = "es_CO.UTF-8";
     LC_MEASUREMENT = "es_CO.UTF-8";
