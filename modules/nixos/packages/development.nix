@@ -25,5 +25,7 @@ in
     nix-init # Nixos package generator
     slack # Desktop client for Slack
     devenv # Fast, Declarative, Reproducible, and Composable Developer Environments
+    bat # Cat clone with syntax highlighting and Git integration
+    btop # Monitor of resources
   ];
 }
