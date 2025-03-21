@@ -8,7 +8,8 @@
     kdePackages.kio-gdrive # KIO Slave to access Google Drive
     kdePackages.kaccounts-providers # KDE accounts providers
     kdePackages.kaccounts-integration # KDE accounts integration
-    ente-auth # 2fa token manager
+    #TODO: ente fails with "[1]    61490 segmentation fault"
+    # ente-auth # 2fa token manager
     protonvpn-gui # Proton VPN GTK app for Linux
     tree # Command to produce a depth indented directory listing
 
