@@ -27,5 +27,6 @@ in
     devenv # Fast, Declarative, Reproducible, and Composable Developer Environments
     bat # Cat clone with syntax highlighting and Git integration
     btop # Monitor of resources
+    gh # GitHub CLI tool
   ];
 }
