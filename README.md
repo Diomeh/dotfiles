@@ -13,20 +13,26 @@ Ensure you have Nix installed on your system. Follow the [Nix installation guide
 
 #### First Time Setup
 
-Clone the repository:
+Clone the repository
 
 ```bash
 git clone https://github.com/Diomeh/dotfiles.git
 cd dotfiles
 ```
 
-Add NixOS and home-manager channels, set `CHANNEL` to one of [these channels](https://channels.nixos.org)
+Add NixOS and home-manager channels *(list of available channels [here](https://channels.nixos.org))*
 
-*Note: it is best to keep NixOS and home-manager channels in sync, i.e. use `nixos-[CHANNEL]` and `release-[CHANNEL]` respectively.*
+> [!NOTE]
+> It is best to keep NixOS and home-manager channels in sync,
+> i.e. if on `nixos-24.11` use `nixos-24.11` and `release-24.11.tar.gz`
+> for both `nixos` and `home-manager` respectively.
+
+We also add `nixos-unstable` channel to allow for installing packages from unstable release
 
 ```bash
-sudo nix channel --add https://nixos.org/channels/nixos-[CHANNEL] nixos
-sudo nix channel --add https://github.com/nix-community/home-manager/archive/release-[CHANNEL].tar.gz home-manager
+sudo nix-channel --add https://nixos.org/channels/nixos-unstable nixos-unstable
+sudo nix-channel --add https://nixos.org/channels/nixos-24.11 nixos
+sudo nix-channel --add https://github.com/nix-community/home-manager/archive/release-24.11.tar.gz home-manager
 ```
 
 Update the channels:
@@ -35,38 +41,71 @@ Update the channels:
 sudo nix-channel --update
 ```
 
-Edit the following files to set your username:
-- [./modules/users/default.nix](./modules/users/default.nix)
-- [./hosts/nixos/home.nix](./hosts/nixos/configuration.nix)
-- [./modules/settings/home-manager.nix](./modules/settings/home-manager.nix): also set your hostname, should be the same as `networking.hostName` in `configuration.nix`.
-- [./modules/settings/nix-helper.nix](./modules/settings/nix-helper.nix)
-- [./modules/settings/network.nix](./modules/settings/network.nix)
-- [./modules/packages/gaming/wine.nix](./modules/packages/gaming/wine.nix)
-- [./modules/packages/virtualization/docker.nix](./modules/packages/virtualization/docker.nix)
-- [./modules/packages/virtualization/libvirt.nix](./modules/packages/virtualization/libvirt.nix)
-- [./modules/packages/virtualization/virtualbox.nix](./modules/packages/virtualization/virtualbox.nix)
+##### Setup your user
+
+Copy `hosts/nixos/options.nix.example` to `hosts/nixos/options.nix`, then update the user definition
 
 ```nix
-{ ... }:
-let
-  username = "username";
-  hostname = "hostname";
-in
-{
-    ...
-}
-``` 
+  mkUserOption = {
+    isNormalUser = true; # Is this a human user?
+    username = "user"; ### change 'user' for your desired username 
+    description = "user";
+    groups = ["wheel" "networkmanager"];
+    shell = pkgs.zsh;
+    home = "/home/user";
+    pkgs = with pkgs; [ ];
+  };
+```
 
-Apply the configuration (replace `[HOSTNAME]` with the hostname of the system, `nixos` by default):
+##### Setup hostname *(optional)*
+
+If you wish to use another hostname instead of the default `nixos`, change
+
+1. `flake.nix`: Under `nixosConfigurations` copy or edit the configuration with your desired hostname
+2. In `hosts/nixos/configuration.nix` update entry `networking.hostName`
+3. In `modules/nixos/settings/home-manager.nix` update variable `hostname`
+4. Update hostname directory under `hosts/`
+
+##### Setup hardware config
+
+As hardware config will be different for every host, use the one generated during distro installation
+
+
+> [!NOTE]
+> If you changed hostname, use the one you defined instead of `nixos`
 
 ```bash
-sudo nixos-rebuild switch --flake .#[HOSTNAME]
+sudo copy -fv /etc/nixos/hardware-configuration.nix ./hosts/nixos/
+```
+
+##### Update flake *(optional)*
+
+```nix
+nix --extra-experimental-features nix-command --extra-experimental-features flakes flake lock
+nix --extra-experimental-features nix-command --extra-experimental-features flakes flake update
+```
+
+##### Bootloader
+
+> [!IMPORTANT]
+> Bootloader configuration will be different for different NixOS setups, 
+> it is recommened to copy definitions from `/etc/nixos/configuration.nix`
+> to `./hosts/nixos/configuration.nix`
+
+***
+
+#### Apply config
+
+Apply the configuration (if changed replace hostname of the system, `nixos` by default):
+
+```bash
+sudo nixos-rebuild switch --flake .#nixos
 ```
 
 If on `zsh` shell, apply configuration like so:
 
 ```bash
-sudo nixos-rebuild switch --flake ".#[HOSTNAME]"
+sudo nixos-rebuild switch --flake ".#nixos"
 ```
 
 #### Regarding `nix-helper`
@@ -81,7 +120,8 @@ sudo nixos-rebuild switch --flake ".#[HOSTNAME]"
 }
 ```
 
-*Important!: configuration names defined in `flake.nix` must match the system name in `networking.hostName` for correct `nh` operation.*
+> [!IMPORTANT]
+> Configuration names defined in `flake.nix` must match the system name in `networking.hostName` for correct `nh` operation.
 
 #### Updating the Configuration
 
