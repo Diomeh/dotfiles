@@ -74,7 +74,7 @@
     ../../modules/nixos/packages/virtualization/docker.nix
     # ../../modules/nixos/packages/virtualization/libvirt.nix
     # ../../modules/nixos/packages/virtualization/virtualbox.nix
-    # ../../modules/nixos/packages/virtualization/waydroid.nix
+    ../../modules/nixos/packages/virtualization/waydroid.nix
 
     # Import specialisations
     # ../../modules/nixos/specialisations/on-the-go.nix
