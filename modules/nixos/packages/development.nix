@@ -20,6 +20,7 @@ in
     unstable.jetbrains.rust-rover # Rust IDE
     unstable.jetbrains.pycharm-professional # Python IDE
     unstable.jetbrains.phpstorm # PHP IDE
+    unstable.jetbrains.datagrip # Database IDE from JetBrains
     starship # Cross-shell prompt
     nurl # Nixos URL fetcher generator
     nix-init # Nixos package generator
