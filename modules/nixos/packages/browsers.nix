@@ -4,9 +4,9 @@
     brave
     microsoft-edge
     google-chrome
-    opera
+    # opera
   ];
 
   # Install firefox.
-  programs.firefox.enable = true;
+  # programs.firefox.enable = true;
 }

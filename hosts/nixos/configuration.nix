@@ -23,7 +23,7 @@
 
     # Import settings
     ../../modules/nixos/settings/bluetooth.nix
-    ../../modules/nixos/settings/cups.nix
+    # ../../modules/nixos/settings/cups.nix
     ../../modules/nixos/settings/firewall.nix
     ../../modules/nixos/settings/fonts.nix
     ../../modules/nixos/settings/fstrim.nix
@@ -74,7 +74,7 @@
     ../../modules/nixos/packages/virtualization/docker.nix
     # ../../modules/nixos/packages/virtualization/libvirt.nix
     # ../../modules/nixos/packages/virtualization/virtualbox.nix
-    ../../modules/nixos/packages/virtualization/waydroid.nix
+    # ../../modules/nixos/packages/virtualization/waydroid.nix
 
     # Import specialisations
     # ../../modules/nixos/specialisations/on-the-go.nix
