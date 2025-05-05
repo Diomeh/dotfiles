@@ -17,7 +17,7 @@ in
     # sublime4 # Sublime Text
     zenity # Tool to display dialogs from the commandline and shell scripts
     # unstable.jetbrains.webstorm # Web development IDE
-    # unstable.jetbrains.rust-rover # Rust IDE
+    unstable.jetbrains.rust-rover # Rust IDE
     # unstable.jetbrains.pycharm-professional # Python IDE
     unstable.jetbrains.phpstorm # PHP IDE
     # unstable.jetbrains.datagrip # Database IDE from JetBrains
