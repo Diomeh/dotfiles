@@ -11,9 +11,9 @@ in
     gitkraken # GitKraken Git GUI
     glab # GitLab CLI
     bruno # API testing tool
-    beekeeper-studio # SQL GUI
+    unstable.beekeeper-studio # SQL GUI
     # dbeaver-bin # SQL GUI
-    kate # Kate text editor
+    kdePackages.kate # Kate text editor
     # sublime4 # Sublime Text
     zenity # Tool to display dialogs from the commandline and shell scripts
     # unstable.jetbrains.webstorm # Web development IDE

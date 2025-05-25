@@ -4,7 +4,7 @@
   # sound.enable = true;
 
   # Disable pulseaudio and enable rtkit for pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
 
   # Enable pipewire services.

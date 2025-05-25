@@ -16,7 +16,7 @@
 
     shellIntegration.enableZshIntegration = true;
     font = {
-      name = "GeistMono Nerd Font";
+      package = pkgs.nerd-fonts.geist-mono;
       size = 11;
     };
     settings = {

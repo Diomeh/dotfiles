@@ -44,13 +44,8 @@
       paste = "/run/current-system/sw/bin/paste";
     };
 
-    # Extra commands that should be added to {file}.zshrc before compinit.
-    initExtraBeforeCompInit = ''
-      # Add your custom before compinit zsh configuration here 
-    '';
-
     # Extra commands that should be added to {file}.zshrc.
-    initExtra = ''
+    initContent = ''
       # ctrl + backspace to delete word to the left of cursor
       bindkey '^H' backward-kill-word
 

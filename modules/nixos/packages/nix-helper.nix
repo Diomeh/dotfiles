@@ -2,7 +2,7 @@
 {
   environment.sessionVariables = {
     # For nix helper
-    FLAKE = "/home/${config.users.default.username}/dotfiles";
+    NH_FLAKE = "/home/${config.users.default.username}/dotfiles";
   };
 
   environment.systemPackages = with pkgs; [
