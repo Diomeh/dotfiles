@@ -29,5 +29,6 @@ in
     bat # Cat clone with syntax highlighting and Git integration
     btop # Monitor of resources
     gh # GitHub CLI tool
+    rustup # Rust toolchain installer
   ];
 }
