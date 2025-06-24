@@ -12,11 +12,11 @@ in
     glab # GitLab CLI
     bruno # API testing tool
     unstable.beekeeper-studio # SQL GUI
-    # dbeaver-bin # SQL GUI
+    dbeaver-bin # SQL GUI
     kdePackages.kate # Kate text editor
     # sublime4 # Sublime Text
     zenity # Tool to display dialogs from the commandline and shell scripts
-    # unstable.jetbrains.webstorm # Web development IDE
+    unstable.jetbrains.webstorm # Web development IDE
     unstable.jetbrains.rust-rover # Rust IDE
     # unstable.jetbrains.pycharm-professional # Python IDE
     unstable.jetbrains.phpstorm # PHP IDE
@@ -30,5 +30,6 @@ in
     btop # Monitor of resources
     gh # GitHub CLI tool
     rustup # Rust toolchain installer
+    nodejs_22 # Event-driven I/O framework for the V8 JavaScript engine
   ];
 }

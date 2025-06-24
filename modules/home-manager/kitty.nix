@@ -18,6 +18,7 @@
     font = {
       package = pkgs.nerd-fonts.geist-mono;
       size = 11;
+      name = "Geist";
     };
     settings = {
       disable_ligatures = "always";

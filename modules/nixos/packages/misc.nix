@@ -21,5 +21,6 @@
     p7zip # xtract
     unzip # xtract
     unrar # xtract
+    obs-studio # Free and open source software for video recording and live streaming
   ];
 }

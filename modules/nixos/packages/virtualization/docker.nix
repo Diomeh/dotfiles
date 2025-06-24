@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ lib, config, pkgs, ... }:
 {
   # Docker daemon
   # This does not enables docker desktop as it is not available on NixOS.
@@ -11,16 +11,20 @@
   virtualisation.docker.enable = true;
 
   # Enable docker daemon in rootless mode
-#   virtualisation.docker.rootless = {
-#     enable = true;
+  # virtualisation.docker.rootless = {
+  #   enable = true;
 
-#     # The setSocketVariable option sets the DOCKER_HOST variable to the rootless Docker instance for normal users by default.
-#     setSocketVariable = true;
-# };
+  #   # The setSocketVariable option sets the DOCKER_HOST variable to the rootless Docker instance for normal users by default.
+  #   setSocketVariable = true;
+  # };
 
   # Add the current user to the docker group
   users.users."${config.users.default.username}".extraGroups = [ "docker" ];
 
   # Force disable docker service so that it is not started on boot
   systemd.services.docker.wantedBy = lib.mkForce [];
+
+  environment.systemPackages = with pkgs; [
+    docker-buildx # Docker CLI plugin for extended build capabilities with BuildKit
+  ];
 }
