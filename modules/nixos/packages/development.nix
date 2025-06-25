@@ -14,7 +14,7 @@ in
     unstable.beekeeper-studio # SQL GUI
     dbeaver-bin # SQL GUI
     kdePackages.kate # Kate text editor
-    # sublime4 # Sublime Text
+    sublime4 # Sublime Text
     zenity # Tool to display dialogs from the commandline and shell scripts
     unstable.jetbrains.webstorm # Web development IDE
     unstable.jetbrains.rust-rover # Rust IDE
@@ -31,5 +31,7 @@ in
     gh # GitHub CLI tool
     rustup # Rust toolchain installer
     nodejs_22 # Event-driven I/O framework for the V8 JavaScript engine
+    act # Run your GitHub Actions locally
+    postman # API Development Environment
   ];
 }
