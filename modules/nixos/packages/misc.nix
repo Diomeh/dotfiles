@@ -22,5 +22,6 @@
     unzip # xtract
     unrar # xtract
     obs-studio # Free and open source software for video recording and live streaming
+    mailspring # Beautiful, fast and maintained fork of Nylas Mail by one of the original authors
   ];
 }

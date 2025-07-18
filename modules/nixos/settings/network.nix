@@ -13,6 +13,6 @@
   # Enable networking
   networking.networkmanager.enable = true;
 
-  # Add the current user to the docker group
+  # Add the current user to the network manager group
   users.users."${config.users.default.username}".extraGroups = [ "networkmanager" ];
 }
