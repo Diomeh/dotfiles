@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 {
   # ext4 partition
   fileSystems."/mnt/drive" =
@@ -7,6 +7,10 @@
     };
 
   # ntfs partition
+  environment.systemPackages = [
+    pkgs.ntfs3g
+  ];
+
   fileSystems."/mnt/ntfs" =
     { device = "/dev/disk/by-uuid/D6744E28744E0C25";
       fsType = "ntfs-3g"; 
