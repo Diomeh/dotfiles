@@ -34,4 +34,11 @@ in
     act # Run your GitHub Actions locally
     postman # API Development Environment
   ];
+
+  # Set user as trusted user of nix store
+  # To allow devenv to auto-manage cache
+  nix.settings.trusted-users = [
+    "root"
+    "${config.users.default.username}"
+  ];
 }
