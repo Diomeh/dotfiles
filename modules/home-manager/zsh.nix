@@ -71,6 +71,14 @@
 
       # Enable starship prompt
       eval "$(starship init zsh)"
+
+      # Alias functions
+
+      # Open kitty tab in specified directory
+      kcd () {
+          local path="''${1:-.}"
+          ${pkgs.kitty}/bin/kitty @ launch --type tab --cwd "$path"
+      }
     '';
 
     oh-my-zsh = {
