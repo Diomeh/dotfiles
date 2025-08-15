@@ -37,6 +37,7 @@
       tab_bar_min_tabs = 1;
       tab_bar_style = "slant";
       tab_activity_symbol = "•";
+      allow_remote_control = "yes";
     };
     keybindings = {
       "ctrl+shift+c" = "copy_to_clipboard";
